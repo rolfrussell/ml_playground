@@ -235,7 +235,7 @@ valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
 # Save the data for later reuse
 ################################################################################
 
-pickle_file = 'notMNIST.pickle'
+pickle_file = file_directory + 'notMNIST.pickle'
 
 try:
   f = open(pickle_file, 'wb')
@@ -259,20 +259,21 @@ print('Compressed pickle size:', statinfo.st_size)
 
 
 
-
+################################################################################
+# Save the data to S3
+################################################################################
 
 import boto
 from boto.s3.key import Key
 conn = boto.connect_s3()
+bucket = conn.get_bucket('ml-playground')
 
 # write file
-bucket = conn.create_bucket('mybucket')
 k = Key(bucket)
-k.key = 'foobar'
-k.set_contents_from_string('This is a test of S3')
+k.key = 'notMNIST.pickle'
+k.set_contents_from_filename(pickle_file)
 
 # read file
-bucket = conn.get_bucket('bucketname')
-key = bucket.get_key("picture.jpg")
-contents = key.get_contents_as_string()
-pickle.loads(content)
+# key = bucket.get_key(pickle_file)
+# contents = key.get_contents_as_string()
+# pickle.loads(content)
