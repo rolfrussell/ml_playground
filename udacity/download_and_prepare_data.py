@@ -18,6 +18,7 @@ from six.moves import cPickle as pickle
 ################################################################################
 
 url = 'http://commondatastorage.googleapis.com/books1000/'
+file_directory = '/mnt/'
 last_percent_reported = None
 
 def download_progress_hook(count, blockSize, totalSize):
@@ -39,17 +40,18 @@ def download_progress_hook(count, blockSize, totalSize):
 
 def maybe_download(filename, expected_bytes, force=False):
   """Download a file if not present, and make sure it's the right size."""
+  filepath = file_directory + filename
   if force or not os.path.exists(filename):
     print('Attempting to download:', filename)
-    filename, _ = urlretrieve(url + filename, filename, reporthook=download_progress_hook)
+    filename, _ = urlretrieve(url + filename, filepath, reporthook=download_progress_hook)
     print('\nDownload Complete!')
-  statinfo = os.stat(filename)
+  statinfo = os.stat(file_path)
   if statinfo.st_size == expected_bytes:
-    print('Found and verified', filename)
+    print('Found and verified', filepath)
   else:
     raise Exception(
-      'Failed to verify ' + filename + '. Can you get to it with a browser?')
-  return filename
+      'Failed to verify ' + filepath + '. Can you get to it with a browser?')
+  return filepath
 
 train_filename = maybe_download('notMNIST_large.tar.gz', 247336696)
 test_filename = maybe_download('notMNIST_small.tar.gz', 8458043)
@@ -253,3 +255,24 @@ except Exception as e:
 
 statinfo = os.stat(pickle_file)
 print('Compressed pickle size:', statinfo.st_size)
+
+
+
+
+
+
+import boto
+from boto.s3.key import Key
+conn = boto.connect_s3()
+
+# write file
+bucket = conn.create_bucket('mybucket')
+k = Key(bucket)
+k.key = 'foobar'
+k.set_contents_from_string('This is a test of S3')
+
+# read file
+bucket = conn.get_bucket('bucketname')
+key = bucket.get_key("picture.jpg")
+contents = key.get_contents_as_string()
+pickle.loads(content)
