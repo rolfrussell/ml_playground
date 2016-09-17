@@ -7,7 +7,7 @@ import numpy as np
 import tensorflow as tf
 from six.moves import cPickle as pickle
 import random
-
+import urllib.request
 
 
 ################################################################################
@@ -30,13 +30,14 @@ pickle_file = 'notMNIST.pickle'
 #   print('Test set', test_dataset.shape, test_labels.shape)
 
 s3_pickle_url = "https://s3.amazonaws.com/ml-playground/" + pickle_file
-datasets = pickle.load(urllib2.urlopen(s3_pickle_url))
-train_dataset = save['train_dataset']
-train_labels = save['train_labels']
-valid_dataset = save['valid_dataset']
-valid_labels = save['valid_labels']
-test_dataset = save['test_dataset']
-test_labels = save['test_labels']
+print(s3_pickle_url)
+datasets = pickle.load(urllib.request.urlopen(s3_pickle_url))
+train_dataset = datasets['train_dataset']
+train_labels = datasets['train_labels']
+valid_dataset = datasets['valid_dataset']
+valid_labels = datasets['valid_labels']
+test_dataset = datasets['test_dataset']
+test_labels = datasets['test_labels']
 del datasets  # hint to help gc free up memory
 print('Training set', train_dataset.shape, train_labels.shape)
 print('Validation set', valid_dataset.shape, valid_labels.shape)
