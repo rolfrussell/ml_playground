@@ -75,7 +75,7 @@ def maybe_extract(filename, force=False):
     print('Extracting data for %s. This may take a while. Please wait.' % root)
     tar = tarfile.open(filename)
     sys.stdout.flush()
-    tar.extractall()
+    tar.extractall('file_directory')
     tar.close()
   data_folders = [
     os.path.join(root, d) for d in sorted(os.listdir(root))
