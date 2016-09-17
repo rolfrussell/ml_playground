@@ -41,7 +41,7 @@ def download_progress_hook(count, blockSize, totalSize):
 def maybe_download(filename, expected_bytes, force=False):
   """Download a file if not present, and make sure it's the right size."""
   filepath = file_directory + filename
-  if force or not os.path.exists(filename):
+  if force or not os.path.exists(filepath):
     print('Attempting to download:', filename)
     filename, _ = urlretrieve(url + filename, filepath, reporthook=download_progress_hook)
     print('\nDownload Complete!')
@@ -75,7 +75,7 @@ def maybe_extract(filename, force=False):
     print('Extracting data for %s. This may take a while. Please wait.' % root)
     tar = tarfile.open(filename)
     sys.stdout.flush()
-    tar.extractall('file_directory')
+    tar.extractall(file_directory)
     tar.close()
   data_folders = [
     os.path.join(root, d) for d in sorted(os.listdir(root))
