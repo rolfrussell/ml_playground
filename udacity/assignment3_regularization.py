@@ -125,7 +125,7 @@ print('network defined')
 # Train and predict
 ################################################################################
 
-num_training_examples = mini_train_dataset.shape[0]
+num_training_examples = train_dataset.shape[0]
 
 with tf.Session(graph=graph5) as session:
   tf.initialize_all_variables().run()
