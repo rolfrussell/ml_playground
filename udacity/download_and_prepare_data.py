@@ -235,10 +235,11 @@ print('randomized datasets')
 # Save the data for later reuse
 ################################################################################
 
-pickle_file = file_directory + 'notMNIST.pickle'
+pickle_file = 'notMNIST.pickle'
+pickle_path = file_directory + pickle_file
 
 try:
-  f = open(pickle_file, 'wb')
+  f = open(pickle_path, 'wb')
   save = {
     'train_dataset': train_dataset,
     'train_labels': train_labels,
@@ -250,10 +251,10 @@ try:
   pickle.dump(save, f, pickle.HIGHEST_PROTOCOL)
   f.close()
 except Exception as e:
-  print('Unable to save data to', pickle_file, ':', e)
+  print('Unable to save data to', pickle_path, ':', e)
   raise
 
-statinfo = os.stat(pickle_file)
+statinfo = os.stat(pickle_path)
 print('Compressed pickle size:', statinfo.st_size)
 
 
@@ -270,8 +271,8 @@ bucket = conn.get_bucket('ml-playground')
 
 # write file
 k = Key(bucket)
-k.key = 'notMNIST.pickle'
-k.set_contents_from_filename(pickle_file)
+k.key = pickle_file
+k.set_contents_from_filename(pickle_path)
 print('wrote', k.key, 'to S3')
 
 # read file
