@@ -45,7 +45,7 @@ def maybe_download(filename, expected_bytes, force=False):
     print('Attempting to download:', filename)
     filename, _ = urlretrieve(url + filename, filepath, reporthook=download_progress_hook)
     print('\nDownload Complete!')
-  statinfo = os.stat(file_path)
+  statinfo = os.stat(filepath)
   if statinfo.st_size == expected_bytes:
     print('Found and verified', filepath)
   else:
