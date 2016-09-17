@@ -227,7 +227,7 @@ def randomize(dataset, labels):
 train_dataset, train_labels = randomize(train_dataset, train_labels)
 test_dataset, test_labels = randomize(test_dataset, test_labels)
 valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
-
+print('randomized datasets')
 
 
 
@@ -272,6 +272,7 @@ bucket = conn.get_bucket('ml-playground')
 k = Key(bucket)
 k.key = 'notMNIST.pickle'
 k.set_contents_from_filename(pickle_file)
+print('wrote', k.key, 'to S3')
 
 # read file
 # key = bucket.get_key(pickle_file)
