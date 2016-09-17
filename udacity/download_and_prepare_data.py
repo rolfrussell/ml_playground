@@ -261,21 +261,22 @@ print('Compressed pickle size:', statinfo.st_size)
 
 
 ################################################################################
-# Save the data to S3
+# Save the dataset pickle to S3
 ################################################################################
 
-import boto
-from boto.s3.key import Key
-conn = boto.connect_s3()
-bucket = conn.get_bucket('ml-playground')
+import boto3
+s3 = boto3.resource('s3')
+s3.Bucket('ml-playground').Object(pickle_file).put(Body=open(pickle_path, 'rb'))
+print('wrote', pickle_path, 'to S3')
 
-# write file
-k = Key(bucket)
-k.key = pickle_file
-k.set_contents_from_filename(pickle_path)
-print('wrote', k.key, 'to S3')
 
-# read file
-# key = bucket.get_key(pickle_file)
-# contents = key.get_contents_as_string()
-# pickle.loads(content)
+
+################################################################################
+# Download the dataset pickle from S3
+################################################################################
+
+def download_pickle_from_s3():
+  s3 = boto3.resource('s3')
+  s3.meta.client.download_file('ml-playground', 'notMNIST.pickle', 'notMNIST.pickle')
+  print('downloaded notMNIST.pickle from S3')
+
