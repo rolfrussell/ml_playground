@@ -1,3 +1,6 @@
+# From Deep Learning course https://classroom.udacity.com/courses/ud730
+
+
 # These are all the modules we'll be using later. Make sure you can import them
 # before proceeding further.
 from __future__ import print_function
@@ -10,6 +13,7 @@ from scipy import ndimage
 from sklearn.linear_model import LogisticRegression
 from six.moves.urllib.request import urlretrieve
 from six.moves import cPickle as pickle
+import boto3
 
 
 
@@ -18,7 +22,8 @@ from six.moves import cPickle as pickle
 ################################################################################
 
 url = 'http://commondatastorage.googleapis.com/books1000/'
-file_directory = '/mnt/'
+# file_directory = '/mnt/'
+file_directory = ''
 last_percent_reported = None
 
 def download_progress_hook(count, blockSize, totalSize):
@@ -264,7 +269,6 @@ print('Compressed pickle size:', statinfo.st_size)
 # Save the dataset pickle to S3
 ################################################################################
 
-import boto3
 s3 = boto3.resource('s3')
 s3.Bucket('ml-playground').Object(pickle_file).put(Body=open(pickle_path, 'rb'))
 print('wrote', pickle_path, 'to S3')
@@ -275,6 +279,7 @@ print('wrote', pickle_path, 'to S3')
 # Download the dataset pickle from S3
 ################################################################################
 
+import boto3
 def download_pickle_from_s3():
   s3 = boto3.resource('s3')
   s3.meta.client.download_file('ml-playground', 'notMNIST.pickle', 'notMNIST.pickle')
