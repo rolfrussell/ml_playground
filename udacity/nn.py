@@ -22,9 +22,9 @@ START = time.time()
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
-flags.DEFINE_integer('max_steps', 1001, 'Number of steps to run trainer.')
+flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch_size', 200000, 'Size of an epoch, basically how many of the examples to use in training.')
-flags.DEFINE_float('learning_rate', 0.2, 'Initial learning rate.')
+flags.DEFINE_float('learning_rate', 0.1, 'Initial learning rate.')
 flags.DEFINE_float('l2_beta', 5e-4, 'L2 regularization beta value.')
 flags.DEFINE_float('keep_prob', 0.5, 'Keep probability for training dropout.')
 flags.DEFINE_string('data_dir', '', 'Directory for storing data')
@@ -174,7 +174,7 @@ def train():
     summary, acc1, _ = session.run([merged_summaries, accuracy, optimizer], feed_dict=feed_dict('train', step))
     train_writer.add_summary(summary, step)
 
-    if step % 200 == 0:
+    if step % 500 == 0:
       summary, acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
       valid_writer.add_summary(summary, step)
       print('Step:', step, 'Elapsed seconds:', int(time.time() - START))
