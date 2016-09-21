@@ -154,7 +154,9 @@ def train():
   keep_prob = tf.placeholder(tf.float32)
   all_weights = []
   hidden1 = nn_layer(features, NUM_FEATURES, 1028, 'layer1')
-  logits = nn_layer(hidden1, 1028, NUM_LABELS, 'layer2', act=None)
+  hidden2 = nn_layer(hidden1, 1028, 256, 'layer2')
+  hidden3 = nn_layer(hidden2, 256, 128, 'layer3')
+  logits = nn_layer(hidden3, 128, NUM_LABELS, 'layer4', act=None)
 
   # Optimize
   loss = loss()
