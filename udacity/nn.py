@@ -22,7 +22,7 @@ START = time.time()
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('local_data', platform == 'darwin', 'If true, loads data from local filesystem.')
+flags.DEFINE_boolean('s3_data', False, 'If true, loads data from S3.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch_size', 200000, 'Size of an epoch, basically how many of the examples to use in training.')
@@ -47,12 +47,12 @@ def load_datasets(from_s3 = True):
     return dataset, labels
 
   pickle_file = 'notMNIST.pickle'
-  if FLAGS.local_data:
-    with open(pickle_file, 'rb') as f:
-      datasets = pickle.load(f)
-  else:
+  if FLAGS.s3_data:
     s3_pickle_url = "https://s3.amazonaws.com/ml-playground/" + pickle_file
     datasets = pickle.load(urllib.request.urlopen(s3_pickle_url))
+  else:
+    with open(pickle_file, 'rb') as f:
+      datasets = pickle.load(f)
 
   train_dataset = datasets['train_dataset']
   train_labels = datasets['train_labels']
@@ -201,7 +201,7 @@ print('learning_rate:', FLAGS.learning_rate)
 print('l2_beta:', FLAGS.l2_beta)
 print('keep_prob:', FLAGS.keep_prob)
 print('epoch_size:', FLAGS.epoch_size, '\n')
-print('local_data:', FLAGS.local_data, '\n')
+print('s3_data:', FLAGS.s3_data, '\n')
 
 if 'train_dataset' not in vars():
   train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = load_datasets()
