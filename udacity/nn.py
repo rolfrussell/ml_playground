@@ -12,6 +12,7 @@ from sys import platform, maxsize
 import socket
 import time
 import ast
+import math
 
 
 IMAGE_SIZE = 28
