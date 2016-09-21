@@ -8,7 +8,7 @@ import tensorflow as tf
 from six.moves import cPickle as pickle
 import random
 import urllib.request
-from sys import platform
+from sys import platform, maxsize
 import socket
 import time
 
@@ -25,13 +25,25 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('s3_data', False, 'If true, loads data from S3.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
-flags.DEFINE_integer('epoch_size', 100000000000, 'Size of an epoch, basically how many of the examples to use in training.')
+flags.DEFINE_integer('epoch', maxsize, 'Size of an epoch, basically how many of the examples to use in training.')
 flags.DEFINE_float('learning_rate', 0.1, 'Initial learning rate.')
 flags.DEFINE_float('l2_beta', 5e-4, 'L2 regularization beta value.')
 flags.DEFINE_float('keep_prob', 0.5, 'Keep probability for training dropout.')
 flags.DEFINE_string('data_dir', '', 'Directory for storing data')
 flags.DEFINE_string('summaries_dir', 'tmp/summary_logs', 'Summaries directory')
 
+
+
+################################################################################
+# Print key parameters before training
+################################################################################
+def print_key_parameters():
+  print('learning_rate:', FLAGS.learning_rate)
+  print('l2_beta:', FLAGS.l2_beta)
+  print('keep_prob:', FLAGS.keep_prob)
+  print('max_steps', FLAGS.max_steps)
+  print('s3_data:', FLAGS.s3_data)
+  print('epoch_size:', epoch_size, '\n')
 
 
 ################################################################################
@@ -160,7 +172,7 @@ def train():
   # Train
   def feed_dict(type, step):
     if type == 'train':
-      offset = (step * BATCH_SIZE) % (FLAGS.epoch_size - BATCH_SIZE)
+      offset = (step * BATCH_SIZE) % (epoch_size - BATCH_SIZE)
       batch_features = train_features[offset:(offset+BATCH_SIZE), :]
       batch_labels = train_labels[offset:(offset+BATCH_SIZE), :]
       return {features: batch_features, labels: batch_labels, keep_prob: FLAGS.keep_prob}
@@ -197,19 +209,15 @@ def train():
 ################################################################################
 # Execute
 ################################################################################
-print('learning_rate:', FLAGS.learning_rate)
-print('l2_beta:', FLAGS.l2_beta)
-print('keep_prob:', FLAGS.keep_prob)
-print('max_steps', FLAGS.max_steps)
-print('epoch_size:', FLAGS.epoch_size)
-print('s3_data:', FLAGS.s3_data, '\n')
-
 if 'train_features' not in vars():
   train_features, train_labels, valid_features, valid_labels, test_features, test_labels = load_datasets()
 
+epoch_size = min(FLAGS.epoch, train_features.shape[0])
+print_key_parameters()
+
 # use a subset of the training data
-train_features = train_features[:FLAGS.epoch_size]
-train_labels = train_labels[:FLAGS.epoch_size]
+train_features = train_features[:epoch_size]
+train_labels = train_labels[:epoch_size]
 
 # clear previous training logs
 if tf.gfile.Exists(FLAGS.summaries_dir):
