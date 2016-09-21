@@ -185,19 +185,20 @@ def train():
 
 
   for step in range(FLAGS.max_steps):
-    summary, acc1, _ = session.run([merged_summaries, accuracy, optimizer], feed_dict=feed_dict('train', step))
+    summary, tr_acc, _ = session.run([merged_summaries, accuracy, optimizer], feed_dict=feed_dict('train', step))
     train_writer.add_summary(summary, step)
 
     if step % 500 == 0:
-      summary, acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
+      summary, va_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
       valid_writer.add_summary(summary, step)
       print('Step:', step, 'Elapsed seconds:', int(time.time() - START))
-      print('Training accuracy:', acc1)
-      print('Validation accuracy:', acc, '\n')
+      print('Training accuracy:', tr_acc)
+      print('Validation accuracy:', va_acc, '\n')
 
-  summary, acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('test', step))
+  summary, te_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('test', step))
   test_writer.add_summary(summary, step)
-  print('Test accuracy:', acc)
+  print('Test accuracy:', va_acc)
+  print('Test accuracy:', te_acc)
 
   train_writer.close()
   valid_writer.close()
