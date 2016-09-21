@@ -8,6 +8,7 @@ import tensorflow as tf
 from six.moves import cPickle as pickle
 import random
 import urllib.request
+from sys import platform
 import socket
 import time
 
@@ -21,7 +22,7 @@ START = time.time()
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('local_data', False, 'If true, loads data from local filesystem.')
+flags.DEFINE_boolean('local_data', platform == 'darwin', 'If true, loads data from local filesystem.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch_size', 200000, 'Size of an epoch, basically how many of the examples to use in training.')
@@ -46,7 +47,7 @@ def load_datasets(from_s3 = True):
     return dataset, labels
 
   pickle_file = 'notMNIST.pickle'
-  if FLAGS.local_data or (socket.gethostname() == 'Rolfs-MacBook-Pro.local'):
+  if FLAGS.local_data:
     with open(pickle_file, 'rb') as f:
       datasets = pickle.load(f)
   else:
@@ -200,6 +201,7 @@ print('learning_rate:', FLAGS.learning_rate)
 print('l2_beta:', FLAGS.l2_beta)
 print('keep_prob:', FLAGS.keep_prob)
 print('epoch_size:', FLAGS.epoch_size, '\n')
+print('local_data:', FLAGS.local_data, '\n')
 
 if 'train_dataset' not in vars():
   train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = load_datasets()
