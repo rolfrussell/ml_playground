@@ -28,10 +28,11 @@ flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testi
 flags.DEFINE_string('hidden_layers', '[1028]', 'Number of nodes in each hidden layer.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch', maxsize, 'Size of an epoch, basically how many of the examples to use in training.')
-flags.DEFINE_float('learning_rate', 0.1, 'Initial learning rate.')
-flags.DEFINE_float('l2_beta', 5e-4, 'L2 regularization beta value.')
+flags.DEFINE_float('initial_learning_rate', 0.1, 'Initial learning rate.')
+flags.DEFINE_float('decay_steps', 1000, 'How many steps for each full decay.')
+flags.DEFINE_float('decay_rate', 0.96, 'Rate at which learning rate decays.')
+flags.DEFINE_float('l2_beta', 5e-4, 'Beta of L2 regularization')
 flags.DEFINE_float('keep_prob', 0.5, 'Keep probability for training dropout.')
-flags.DEFINE_string('data_dir', '', 'Directory for storing data')
 flags.DEFINE_string('summaries_dir', 'tmp/summary_logs', 'Summaries directory')
 
 
@@ -40,12 +41,14 @@ flags.DEFINE_string('summaries_dir', 'tmp/summary_logs', 'Summaries directory')
 # Print key parameters before training
 ################################################################################
 def print_key_parameters():
-  print('learning_rate:', FLAGS.learning_rate)
+  print('hidden_layers:', hidden_layers)
+  print('initial_learning_rate:', FLAGS.initial_learning_rate)
+  print('decay_steps:', FLAGS.decay_steps)
+  print('decay_rate:', FLAGS.decay_rate)
   print('l2_beta:', FLAGS.l2_beta)
   print('keep_prob:', FLAGS.keep_prob)
   print('max_steps', FLAGS.max_steps)
   print('s3_data:', FLAGS.s3_data)
-  print('hidden_layers:', hidden_layers)
   print('epoch_size:', epoch_size, '\n')
 
 
@@ -160,20 +163,13 @@ def train():
     input_tensor = features if i == 0 else layer
     input_dim = NUM_FEATURES if i == 0 else hidden_layers[i-1]
     layer = nn_layer(input_tensor, input_dim, hidden_layers[i], "layer"+str(i))
-
-  #hidden1 = nn_layer(features, NUM_FEATURES, 1028, 'layer1')
-  #hidden2 = nn_layer(hidden1, 1028, 1028, 'layer2')
-  #hidden3 = nn_layer(hidden2, 1028, 1028, 'layer3')
-  #hidden4 = nn_layer(hidden3, 1028, 1028, 'layer4')
-  #hidden5 = nn_layer(hidden4, 1028, 1028, 'layer5')
-  #hidden6 = nn_layer(hidden5, 1028, 1028, 'layer6')
-  #hidden7 = nn_layer(hidden6, 1028, 1028, 'layer7')
-  #hidden8 = nn_layer(hidden7, 1028, 1028, 'layer8')
   logits = nn_layer(layer, hidden_layers[-1], NUM_LABELS, "layer"+str(len(hidden_layers)), act=None)
 
   # Optimize
   loss = loss()
-  optimizer = tf.train.GradientDescentOptimizer(FLAGS.learning_rate).minimize(loss)
+  global_step = tf.Variable(0)  # count the number of steps taken.
+  learning_rate = tf.train.exponential_decay(FLAGS.initial_learning_rate, global_step, FLAGS.decay_steps, FLAGS.decay_rate)
+  optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
   accuracy = accuracy()
 
   # Merge all the summaries and write them out to file
