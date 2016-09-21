@@ -26,7 +26,7 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('s3_data', False, 'If true, loads data from S3.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
-flags.DEFINE_string('hidden_layers', '[1028]', 'Number of nodes in each hidden layer.')
+flags.DEFINE_string('hidden_layers', '[1024]', 'Number of nodes in each hidden layer.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch', maxsize, 'Size of an epoch, basically how many of the examples to use in training.')
 flags.DEFINE_float('initial_learning_rate', 0.1, 'Initial learning rate.')
@@ -199,7 +199,7 @@ def train():
     summary, tr_acc, _ = session.run([merged_summaries, accuracy, optimizer], feed_dict=feed_dict('train', step))
     train_writer.add_summary(summary, step)
 
-    if step % 500 == 0:
+    if step % 1000 == 0:
       summary, va_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
       valid_writer.add_summary(summary, step)
       epoch = math.ceil(step*BATCH_SIZE/epoch_size)
