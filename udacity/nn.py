@@ -8,7 +8,7 @@ import tensorflow as tf
 from six.moves import cPickle as pickle
 import random
 import urllib.request
-from sys import platform
+from sys import platform, maxsize
 import socket
 import time
 
@@ -25,7 +25,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('s3_data', False, 'If true, loads data from S3.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
-flags.DEFINE_integer('epoch_size', sys.maxint, 'Size of an epoch, basically how many of the examples to use in training.')
+flags.DEFINE_integer('epoch_size', maxsize, 'Size of an epoch, basically how many of the examples to use in training.')
 flags.DEFINE_float('learning_rate', 0.1, 'Initial learning rate.')
 flags.DEFINE_float('l2_beta', 5e-4, 'L2 regularization beta value.')
 flags.DEFINE_float('keep_prob', 0.5, 'Keep probability for training dropout.')
