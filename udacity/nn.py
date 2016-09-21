@@ -46,7 +46,7 @@ def load_datasets(from_s3 = True):
     return dataset, labels
 
   pickle_file = 'notMNIST.pickle'
-  if FLAGS.local_data || (socket.gethostname() == 'Rolfs-MacBook-Pro.local'):
+  if FLAGS.local_data or (socket.gethostname() == 'Rolfs-MacBook-Pro.local'):
     with open(pickle_file, 'rb') as f:
       datasets = pickle.load(f)
   else:
