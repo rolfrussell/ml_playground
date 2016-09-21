@@ -21,6 +21,7 @@ START = time.time()
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
+flags.DEFINE_boolean('local_data', False, 'If true, loads data from local filesystem.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch_size', 200000, 'Size of an epoch, basically how many of the examples to use in training.')
@@ -45,7 +46,7 @@ def load_datasets(from_s3 = True):
     return dataset, labels
 
   pickle_file = 'notMNIST.pickle'
-  if (socket.gethostname() == 'Rolfs-MacBook-Pro.local'):
+  if FLAGS.local_data || (socket.gethostname() == 'Rolfs-MacBook-Pro.local'):
     with open(pickle_file, 'rb') as f:
       datasets = pickle.load(f)
   else:
