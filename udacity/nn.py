@@ -48,7 +48,6 @@ def print_key_parameters():
   print('l2_beta:', FLAGS.l2_beta)
   print('keep_prob:', FLAGS.keep_prob)
   print('max_steps', FLAGS.max_steps)
-  print('s3_data:', FLAGS.s3_data)
   print('epoch_size:', epoch_size, '\n')
 
 
