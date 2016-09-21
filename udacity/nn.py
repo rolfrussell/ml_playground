@@ -11,6 +11,7 @@ import urllib.request
 from sys import platform, maxsize
 import socket
 import time
+import ast
 
 
 IMAGE_SIZE = 28
@@ -24,7 +25,7 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('s3_data', False, 'If true, loads data from S3.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
-flags.DEFINE_integer('num_hidden_layers', 1, 'Number of hidden layers.')
+flags.DEFINE_string('hidden_layers', '[1028]', 'Number of nodes in each hidden layer.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch', maxsize, 'Size of an epoch, basically how many of the examples to use in training.')
 flags.DEFINE_float('learning_rate', 0.1, 'Initial learning rate.')
@@ -44,7 +45,7 @@ def print_key_parameters():
   print('keep_prob:', FLAGS.keep_prob)
   print('max_steps', FLAGS.max_steps)
   print('s3_data:', FLAGS.s3_data)
-  print('num_hidden_layers:', FLAGS.num_hidden_layers, '\n')
+  print('hidden_layers:', hidden_layers)
   print('epoch_size:', epoch_size, '\n')
 
 
@@ -155,11 +156,11 @@ def train():
   # Define network
   keep_prob = tf.placeholder(tf.float32)
   all_weights = []
-  for i in range(FLAGS.num_hidden_layers):
+  for i in range(len(hidden_layers)):
     input_tensor = features if i == 0 else layer
-    input_dim = NUM_FEATURES if i == 0 else 1028
-    layer = nn_layer(input_tensor, input_dim, 1028, "layer"+str(i))
-    
+    input_dim = NUM_FEATURES if i == 0 else hidden_layers[i-1]
+    layer = nn_layer(input_tensor, input_dim, hidden_layers[i], "layer"+str(i))
+
   #hidden1 = nn_layer(features, NUM_FEATURES, 1028, 'layer1')
   #hidden2 = nn_layer(hidden1, 1028, 1028, 'layer2')
   #hidden3 = nn_layer(hidden2, 1028, 1028, 'layer3')
@@ -168,7 +169,7 @@ def train():
   #hidden6 = nn_layer(hidden5, 1028, 1028, 'layer6')
   #hidden7 = nn_layer(hidden6, 1028, 1028, 'layer7')
   #hidden8 = nn_layer(hidden7, 1028, 1028, 'layer8')
-  logits = nn_layer(layer, 1028, NUM_LABELS, "layer"+str(FLAGS.num_hidden_layers), act=None)
+  logits = nn_layer(layer, hidden_layers[-1], NUM_LABELS, "layer"+str(len(hidden_layers)), act=None)
 
   # Optimize
   loss = loss()
@@ -227,6 +228,7 @@ def train():
 if 'train_features' not in vars():
   train_features, train_labels, valid_features, valid_labels, test_features, test_labels = load_datasets()
 
+hidden_layers = ast.literal_eval(FLAGS.hidden_layers)
 epoch_size = min(FLAGS.epoch, train_features.shape[0])
 print_key_parameters()
 
