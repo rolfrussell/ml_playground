@@ -200,7 +200,8 @@ def train():
 print('learning_rate:', FLAGS.learning_rate)
 print('l2_beta:', FLAGS.l2_beta)
 print('keep_prob:', FLAGS.keep_prob)
-print('epoch_size:', FLAGS.epoch_size, '\n')
+print('max_steps', FLAGS.max_steps)
+print('epoch_size:', FLAGS.epoch_size)
 print('s3_data:', FLAGS.s3_data, '\n')
 
 if 'train_dataset' not in vars():
