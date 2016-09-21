@@ -25,7 +25,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('s3_data', False, 'If true, loads data from S3.')
 flags.DEFINE_boolean('fake_data', False, 'If true, uses fake data for unit testing.')
 flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
-flags.DEFINE_integer('epoch_size', 999999999999, 'Size of an epoch, basically how many of the examples to use in training.')
+flags.DEFINE_integer('epoch_size', 100000000000, 'Size of an epoch, basically how many of the examples to use in training.')
 flags.DEFINE_float('learning_rate', 0.1, 'Initial learning rate.')
 flags.DEFINE_float('l2_beta', 5e-4, 'L2 regularization beta value.')
 flags.DEFINE_float('keep_prob', 0.5, 'Keep probability for training dropout.')
@@ -40,11 +40,11 @@ flags.DEFINE_string('summaries_dir', 'tmp/summary_logs', 'Summaries directory')
 ################################################################################
 def load_datasets(from_s3 = True):
 
-  def reformat(dataset, labels):
-    dataset = dataset.reshape((-1, IMAGE_SIZE * IMAGE_SIZE)).astype(np.float32)
+  def reformat(features, labels):
+    features = features.reshape((-1, IMAGE_SIZE * IMAGE_SIZE)).astype(np.float32)
     # Map 2 to [0.0, 1.0, 0.0 ...], 3 to [0.0, 0.0, 1.0 ...]
     labels = (np.arange(NUM_LABELS) == labels[:,None]).astype(np.float32)
-    return dataset, labels
+    return features, labels
 
   pickle_file = 'notMNIST.pickle'
   if FLAGS.s3_data:
@@ -54,22 +54,22 @@ def load_datasets(from_s3 = True):
     with open(pickle_file, 'rb') as f:
       datasets = pickle.load(f)
 
-  train_dataset = datasets['train_dataset']
+  train_features = datasets['train_dataset']
   train_labels = datasets['train_labels']
-  valid_dataset = datasets['valid_dataset']
+  valid_features = datasets['valid_dataset']
   valid_labels = datasets['valid_labels']
-  test_dataset = datasets['test_dataset']
+  test_features = datasets['test_dataset']
   test_labels = datasets['test_labels']
   del datasets  # hint to help gc free up memory
 
-  train_dataset, train_labels = reformat(train_dataset, train_labels)
-  valid_dataset, valid_labels = reformat(valid_dataset, valid_labels)
-  test_dataset, test_labels = reformat(test_dataset, test_labels)
+  train_features, train_labels = reformat(train_features, train_labels)
+  valid_features, valid_labels = reformat(valid_features, valid_labels)
+  test_features, test_labels = reformat(test_features, test_labels)
 
-  print('Training set', train_dataset.shape, train_labels.shape)
-  print('Validation set', valid_dataset.shape, valid_labels.shape)
-  print('Test set', test_dataset.shape, test_labels.shape, '\n')
-  return train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels
+  print('Training set', train_features.shape, train_labels.shape)
+  print('Validation set', valid_features.shape, valid_labels.shape)
+  print('Test set', test_features.shape, test_labels.shape, '\n')
+  return train_features, train_labels, valid_features, valid_labels, test_features, test_labels
 
 
 
@@ -141,8 +141,8 @@ def train():
   # Define network
   keep_prob = tf.placeholder(tf.float32)
   all_weights = []
-  hidden1 = nn_layer(features, input_size, hidden_size, 'layer1')
-  logits = nn_layer(hidden1, hidden_size, output_size, 'layer2', act=None)
+  hidden1 = nn_layer(features, NUM_FEATURES, 1028, 'layer1')
+  logits = nn_layer(hidden1, 1028, NUM_LABELS, 'layer2', act=None)
 
   # Optimize
   loss = loss()
@@ -161,13 +161,13 @@ def train():
   def feed_dict(type, step):
     if type == 'train':
       offset = (step * BATCH_SIZE) % (FLAGS.epoch_size - BATCH_SIZE)
-      batch_dataset = train_dataset[offset:(offset+BATCH_SIZE), :]
+      batch_features = train_features[offset:(offset+BATCH_SIZE), :]
       batch_labels = train_labels[offset:(offset+BATCH_SIZE), :]
-      return {features: batch_dataset, labels: batch_labels, keep_prob: FLAGS.keep_prob}
+      return {features: batch_features, labels: batch_labels, keep_prob: FLAGS.keep_prob}
     elif type == 'valid':
-      return {features: valid_dataset, labels: valid_labels, keep_prob: 1.0}
+      return {features: valid_features, labels: valid_labels, keep_prob: 1.0}
     elif type == 'test':
-      return {features: test_dataset, labels: test_labels, keep_prob: 1.0}
+      return {features: test_features, labels: test_labels, keep_prob: 1.0}
     else:
       raise RuntimeError("Don't know data of type ", type, "Was expecting train, valid or test")
 
@@ -204,16 +204,12 @@ print('max_steps', FLAGS.max_steps)
 print('epoch_size:', FLAGS.epoch_size)
 print('s3_data:', FLAGS.s3_data, '\n')
 
-if 'train_dataset' not in vars():
-  train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = load_datasets()
+if 'train_features' not in vars():
+  train_features, train_labels, valid_features, valid_labels, test_features, test_labels = load_datasets()
 
 # use a subset of the training data
-train_dataset = train_dataset[:FLAGS.epoch_size]
+train_features = train_features[:FLAGS.epoch_size]
 train_labels = train_labels[:FLAGS.epoch_size]
-
-input_size = train_dataset.shape[1]
-hidden_size = 1028
-output_size = train_labels.shape[1]
 
 # clear previous training logs
 if tf.gfile.Exists(FLAGS.summaries_dir):
