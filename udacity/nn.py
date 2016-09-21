@@ -30,7 +30,7 @@ flags.DEFINE_integer('max_steps', 3001, 'Number of steps to run trainer.')
 flags.DEFINE_integer('epoch', maxsize, 'Size of an epoch, basically how many of the examples to use in training.')
 flags.DEFINE_float('initial_learning_rate', 0.1, 'Initial learning rate.')
 flags.DEFINE_float('decay_steps', 1000, 'How many steps for each full decay.')
-flags.DEFINE_float('decay_rate', 0.96, 'Rate at which learning rate decays.')
+flags.DEFINE_float('decay_rate', 0.9, 'Rate at which learning rate decays.')
 flags.DEFINE_float('l2_beta', 5e-4, 'Beta of L2 regularization')
 flags.DEFINE_float('keep_prob', 0.5, 'Keep probability for training dropout.')
 flags.DEFINE_string('summaries_dir', 'tmp/summary_logs', 'Summaries directory')
@@ -201,7 +201,8 @@ def train():
     if step % 500 == 0:
       summary, va_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
       valid_writer.add_summary(summary, step)
-      print('Step:', step, 'Elapsed seconds:', int(time.time() - START))
+      epoch = math.ceil(step*BATCH_SIZE/epoch_size)
+      print('Step:', step, 'Epoch:', epoch, 'Elapsed seconds:', int(time.time() - START))
       print('Train accuracy:', tr_acc)
       print('Valid accuracy:', va_acc, '\n')
 
