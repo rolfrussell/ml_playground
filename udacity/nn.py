@@ -207,10 +207,10 @@ def train():
       print('Train accuracy:', tr_acc)
       print('Valid accuracy:', va_acc, '\n')
 
-  summary, te_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('test', step))
-  test_writer.add_summary(summary, step)
-  print('Valid accuracy:', va_acc)
-  print('Test accuracy:', te_acc)
+    if step % 5000 == 0:
+      summary, te_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('test', step))
+      test_writer.add_summary(summary, step)
+      print('Test accuracy:', te_acc)
 
   train_writer.close()
   valid_writer.close()
