@@ -203,9 +203,9 @@ def train():
       summary, va_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
       valid_writer.add_summary(summary, step)
       epoch = math.ceil(step*BATCH_SIZE/epoch_size)
-      print('Step:', step, 'Epoch:', epoch, 'Elapsed seconds:', int(time.time() - START))
+      print('\nStep:', step, 'Epoch:', epoch, 'Elapsed seconds:', int(time.time() - START))
       print('Train accuracy:', tr_acc)
-      print('Valid accuracy:', va_acc, '\n')
+      print('Valid accuracy:', va_acc)
 
     if step % 5000 == 0:
       summary, te_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('test', step))
