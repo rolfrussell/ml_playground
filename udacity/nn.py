@@ -18,7 +18,10 @@ import math
 IMAGE_SIZE = 28
 NUM_FEATURES = IMAGE_SIZE * IMAGE_SIZE
 NUM_LABELS = 10
-BATCH_SIZE = 128
+BATCH_SIZE = 16
+NUM_CHANNELS = 1
+PATCH_SIZE = 5
+DEPTH = 16
 START = time.time()
 
 
@@ -56,12 +59,12 @@ def print_key_parameters():
 # Load the datasets from pickle file
 # Reformat the data:  flatten and 1-hot encodings
 ################################################################################
-def load_datasets(from_s3 = True):
+def load_datasets():
 
   def reformat(features, labels):
     features = features.reshape((-1, IMAGE_SIZE * IMAGE_SIZE)).astype(np.float32)
-    # Map 2 to [0.0, 1.0, 0.0 ...], 3 to [0.0, 0.0, 1.0 ...]
-    labels = (np.arange(NUM_LABELS) == labels[:,None]).astype(np.float32)
+    # features = features.reshape((-1, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS)).astype(np.float32)
+    labels = (np.arange(NUM_LABELS) == labels[:,None]).astype(np.float32)  # 1-hot encodings
     return features, labels
 
   pickle_file = 'notMNIST.pickle'
@@ -109,24 +112,11 @@ def train():
 
   def weights_variable(shape):
     weights = tf.Variable(tf.truncated_normal(shape, stddev=0.1), name='weights')
+    all_weights.append(weights)
     return weights
 
-  def biases_variable(shape):
-    return tf.Variable(tf.constant(0.1, shape=shape), name='biases')
-
-
-  def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
-    with tf.name_scope(layer_name):
-      weights = weights_variable([input_dim, output_dim])
-      all_weights.append(weights)
-      biases = biases_variable([output_dim])
-      pre_activations = tf.matmul(input_tensor, weights) + biases
-
-      if act != None:
-        pre_dropouts = act(pre_activations, name='pre_dropouts')
-        return tf.nn.dropout(pre_dropouts, keep_prob, name='activations')
-      else:
-        return pre_activations
+  def biases_variable(number):
+    return tf.Variable(tf.constant(0.1, shape=[number]), name='biases')
 
   def loss():
     with tf.name_scope('loss'):
@@ -147,7 +137,46 @@ def train():
       tf.scalar_summary('accuracy', accuracy)
     return accuracy
 
+  def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
+    with tf.name_scope(layer_name):
+      weights = weights_variable([input_dim, output_dim])
+      biases = biases_variable(output_dim)
+      pre_activations = tf.matmul(input_tensor, weights) + biases
 
+      if act != None:
+        pre_dropouts = act(pre_activations, name='pre_dropouts')
+        return tf.nn.dropout(pre_dropouts, keep_prob, name='activations')
+      else:
+        return pre_activations
+
+  def assignment3_model():
+    for i in range(len(hidden_layers)):
+      input_tensor = features if i == 0 else layer
+      input_dim = NUM_FEATURES if i == 0 else hidden_layers[i-1]
+      layer = nn_layer(input_tensor, input_dim, hidden_layers[i], "layer"+str(i))
+    return nn_layer(layer, hidden_layers[-1], NUM_LABELS, "layer"+str(len(hidden_layers)), act=None)
+
+  def conv_layer(input_tensor, layer_name):
+    with tf.name_scope(layer_name):
+      input_num_channels = input_tensor.get_shape()[3]
+      weights = weights_variable([PATCH_SIZE, PATCH_SIZE, input_num_channels, DEPTH])
+      conv = tf.nn.conv2d(data, weights, [1, 2, 2, 1], padding='SAME')
+      biases = biases_variable(DEPTH)
+      return tf.nn.relu(conv + biases)
+
+  def assignment4_model():
+    layer1 = conv_layer(features, "layer1")
+    layer2 = conv_layer(conv1, "layer2")
+
+    shape = layer2.get_shape().as_list()
+    reshape = tf.reshape(hidden, [shape[0], shape[1] * shape[2] * shape[3]])
+    layer3_weights = weights_variable([IMAGE_SIZE // 4 * IMAGE_SIZE // 4 * DEPTH, 64])
+    layer3_biases = biases_variable(DEPTH)
+    layer3 = tf.nn.relu(tf.matmul(reshape, layer3_weights) + layer3_biases)
+
+    layer4_weights = weights_variable([64, NUM_LABELS])
+    layer4_biases = biases_variable(NUM_LABELS)
+    return tf.matmul(layer3, layer4_weights) + layer4_biases
 
   session = tf.Session()
 
