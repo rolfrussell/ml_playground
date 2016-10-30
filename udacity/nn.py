@@ -62,8 +62,8 @@ def print_key_parameters():
 def load_datasets():
 
   def reformat(features, labels):
-    features = features.reshape((-1, IMAGE_SIZE * IMAGE_SIZE)).astype(np.float32)
-    # features = features.reshape((-1, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS)).astype(np.float32)
+    # features = features.reshape((-1, IMAGE_SIZE * IMAGE_SIZE)).astype(np.float32)
+    features = features.reshape((-1, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS)).astype(np.float32)
     labels = (np.arange(NUM_LABELS) == labels[:,None]).astype(np.float32)  # 1-hot encodings
     return features, labels
 
@@ -110,12 +110,12 @@ def train():
       tf.scalar_summary('min/' + name, tf.reduce_min(var))
       tf.histogram_summary(name, var)
 
-  def weights_variable(shape):
-    weights = tf.Variable(tf.truncated_normal(shape, stddev=0.1), name='weights')
-    all_weights.append(weights)
-    return weights
+  def weights(shape):
+    weights_v = tf.Variable(tf.truncated_normal(shape, stddev=0.1), name='weights')
+    all_weights.append(weights_v)
+    return weights_v
 
-  def biases_variable(number):
+  def biases(number):
     return tf.Variable(tf.constant(0.1, shape=[number]), name='biases')
 
   def loss():
@@ -139,15 +139,14 @@ def train():
 
   def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
     with tf.name_scope(layer_name):
-      weights = weights_variable([input_dim, output_dim])
-      biases = biases_variable(output_dim)
-      pre_activations = tf.matmul(input_tensor, weights) + biases
-
+      the_weights = weights([input_dim, output_dim])
+      the_biases = biases(output_dim)
+      activations = tf.matmul(input_tensor, the_weights) + the_biases
       if act != None:
-        pre_dropouts = act(pre_activations, name='pre_dropouts')
-        return tf.nn.dropout(pre_dropouts, keep_prob, name='activations')
+        activations = act(activations, name='pre_dropouts')
+        return tf.nn.dropout(activations, keep_prob, name='activations')
       else:
-        return pre_activations
+        return activations
 
   def assignment3_model():
     for i in range(len(hidden_layers)):
@@ -158,41 +157,70 @@ def train():
 
   def conv_layer(input_tensor, layer_name):
     with tf.name_scope(layer_name):
-      input_num_channels = input_tensor.get_shape()[3]
-      weights = weights_variable([PATCH_SIZE, PATCH_SIZE, input_num_channels, DEPTH])
-      conv = tf.nn.conv2d(data, weights, [1, 2, 2, 1], padding='SAME')
-      biases = biases_variable(DEPTH)
-      return tf.nn.relu(conv + biases)
+      input_num_channels = input_tensor.get_shape().as_list()[3]
+      the_weights = weights([PATCH_SIZE, PATCH_SIZE, input_num_channels, DEPTH])
+      # conv = tf.nn.conv2d(input_tensor, the_weights, strides=[1, 2, 2, 1], padding='SAME')
+      conv = tf.nn.conv2d(input_tensor, the_weights, strides=[1, 1, 1, 1], padding='SAME')
+      pool = tf.nn.max_pool(conv, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+      the_biases = biases(DEPTH)
+      return tf.nn.relu(pool + the_biases)
 
-  def assignment4_model():
+  def inception_layer(input_tensor, layer_name):
+    with tf.name_scope(layer_name):
+      with tf.variable_scope('branch1x1'):
+        branch1x1 = tf.nn.conv2d(input_tensor, weights([1, 1, 1, 8]), strides=[1, 1, 1, 1], padding='SAME')
+      with tf.variable_scope('branch3x3'):
+        branch3x3 = tf.nn.conv2d(input_tensor, weights([1, 1, 1, 8]), strides=[1, 1, 1, 1], padding='SAME')
+        branch3x3 = tf.nn.conv2d(branch3x3, weights([3, 3, 8, 16]), strides=[1, 1, 1, 1], padding='SAME')
+        branch3x3 = tf.nn.conv2d(branch3x3, weights([3, 3, 16, 16]), strides=[1, 1, 1, 1], padding='SAME')
+      with tf.variable_scope('branch5x5'):
+        branch5x5 = tf.nn.conv2d(input_tensor, weights([1, 1, 1, 8]), strides=[1, 1, 1, 1], padding='SAME')
+        branch5x5 = tf.nn.conv2d(branch5x5, weights([5, 5, 8, 16]), strides=[1, 1, 1, 1], padding='SAME')
+      with tf.variable_scope('branch_pool'):
+        branch_pool = tf.nn.avg_pool(input_tensor, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
+        branch_pool = tf.nn.conv2d(branch_pool, weights([1, 1, 1, 16]), strides=[1, 1, 1, 1], padding='SAME')
+    return tf.concat(3, [branch1x1, branch5x5, branch3x3, branch_pool])
+
+  def assignment4_1_model():
     layer1 = conv_layer(features, "layer1")
-    layer2 = conv_layer(conv1, "layer2")
+    layer2 = conv_layer(layer1, "layer2")
 
     shape = layer2.get_shape().as_list()
-    reshape = tf.reshape(hidden, [shape[0], shape[1] * shape[2] * shape[3]])
-    layer3_weights = weights_variable([IMAGE_SIZE // 4 * IMAGE_SIZE // 4 * DEPTH, 64])
-    layer3_biases = biases_variable(DEPTH)
+    reshape = tf.reshape(layer2, [-1, shape[1] * shape[2] * shape[3]])
+    layer3_weights = weights([shape[1] * shape[2] * shape[3], 64])
+    layer3_biases = biases(64)
     layer3 = tf.nn.relu(tf.matmul(reshape, layer3_weights) + layer3_biases)
 
-    layer4_weights = weights_variable([64, NUM_LABELS])
-    layer4_biases = biases_variable(NUM_LABELS)
+    layer4_weights = weights([64, NUM_LABELS])
+    layer4_biases = biases(NUM_LABELS)
     return tf.matmul(layer3, layer4_weights) + layer4_biases
+
+  def assignment4_2_model():
+    layer1 = inception_layer(features, "layer1")
+
+    shape = layer1.get_shape().as_list()
+    reshape = tf.reshape(layer1, [-1, shape[1] * shape[2] * shape[3]])
+    layer3_weights = weights([shape[1] * shape[2] * shape[3], 64])
+    layer3_biases = biases(64)
+    layer3 = tf.nn.relu(tf.matmul(reshape, layer3_weights) + layer3_biases)
+
+    layer4_weights = weights([64, NUM_LABELS])
+    layer4_biases = biases(NUM_LABELS)
+    return tf.matmul(layer3, layer4_weights) + layer4_biases
+
+
 
   session = tf.Session()
 
-  # Input data. For the training data, we use a placeholder that will be fed at run time with a training minibatch.
   with tf.name_scope('input'):
-    features = tf.placeholder(tf.float32, shape = (None, NUM_FEATURES), name='features')
+    # features = tf.placeholder(tf.float32, shape = (None, NUM_FEATURES), name='features')
+    features = tf.placeholder(tf.float32, shape = (None, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS), name='features')
     labels = tf.placeholder(tf.float32, shape = (None, NUM_LABELS), name='labels')
 
   # Define network
   keep_prob = tf.placeholder(tf.float32)
   all_weights = []
-  for i in range(len(hidden_layers)):
-    input_tensor = features if i == 0 else layer
-    input_dim = NUM_FEATURES if i == 0 else hidden_layers[i-1]
-    layer = nn_layer(input_tensor, input_dim, hidden_layers[i], "layer"+str(i))
-  logits = nn_layer(layer, hidden_layers[-1], NUM_LABELS, "layer"+str(len(hidden_layers)), act=None)
+  logits = assignment4_2_model()
 
   # Optimize
   loss = loss()
@@ -228,7 +256,7 @@ def train():
     summary, tr_acc, _ = session.run([merged_summaries, accuracy, optimizer], feed_dict=feed_dict('train', step))
     train_writer.add_summary(summary, step)
 
-    if step % 1000 == 0:
+    if step % 50 == 0:
       summary, va_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('valid', step))
       valid_writer.add_summary(summary, step)
       epoch = math.ceil(step*BATCH_SIZE/epoch_size)
@@ -236,7 +264,7 @@ def train():
       print('Train accuracy:', tr_acc)
       print('Valid accuracy:', va_acc)
 
-    if step % 5000 == 0:
+    if step % 1000 == 0:
       summary, te_acc = session.run([merged_summaries, accuracy], feed_dict=feed_dict('test', step))
       test_writer.add_summary(summary, step)
       print('Test accuracy:', te_acc)
