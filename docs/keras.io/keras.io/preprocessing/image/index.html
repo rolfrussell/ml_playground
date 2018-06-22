@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from keras.io/preprocessing/image/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:16:28 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Image Preprocessing - Keras Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Source+Sans+Pro:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Image Preprocessing";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-61785484-1', 'keras.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <a href="../../index.html"><div class="keras-logo">
+        <img src="../../img/keras-logo-small-2018.jpg" class="keras-logo-img">
+        Keras Documentation
+      </div></a>
+      <div class="wy-side-nav-search">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="https://keras.io/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../index.html">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../why-use-keras/index.html">Why use Keras</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Getting started</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../getting-started/sequential-model-guide/index.html">Guide to the Sequential model</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../getting-started/functional-api-guide/index.html">Guide to the Functional API</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../getting-started/faq/index.html">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Models</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../models/about-keras-models/index.html">About Keras models</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../models/sequential/index.html">Sequential</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../models/model/index.html">Model (functional API)</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Layers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/about-keras-layers/index.html">About Keras layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/core/index.html">Core Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/convolutional/index.html">Convolutional Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/pooling/index.html">Pooling Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/local/index.html">Locally-connected Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/recurrent/index.html">Recurrent Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/embeddings/index.html">Embedding Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/merge/index.html">Merge Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/advanced-activations/index.html">Advanced Activations Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/normalization/index.html">Normalization Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/noise/index.html">Noise layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/wrappers/index.html">Layer wrappers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../layers/writing-your-own-keras-layers/index.html">Writing your own Keras layers</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Preprocessing</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../sequence/index.html">Sequence Preprocessing</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../text/index.html">Text Preprocessing</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="index.html">Image Preprocessing</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#image-preprocessing">Image Preprocessing</a></li>
+                
+                    <li><a class="toctree-l4" href="#imagedatagenerator-class">ImageDataGenerator class</a></li>
+                
+                    <li><a class="toctree-l4" href="#imagedatagenerator-methods">ImageDataGenerator methods</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../losses/index.html">Losses</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../metrics/index.html">Metrics</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../optimizers/index.html">Optimizers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../activations/index.html">Activations</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../callbacks/index.html">Callbacks</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../datasets/index.html">Datasets</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../applications/index.html">Applications</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../backend/index.html">Backend</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../initializers/index.html">Initializers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../regularizers/index.html">Regularizers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../constraints/index.html">Constraints</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../visualization/index.html">Visualization</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../scikit-learn-api/index.html">Scikit-learn API</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../utils/index.html">Utils</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../contributing/index.html">Contributing</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Keras Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Preprocessing &raquo;</li>
+        
+      
+    
+    <li>Image Preprocessing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/keras-team/keras" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="image-preprocessing">Image Preprocessing</h1>
+<p><span style="float:right;"><a href="https://github.com/keras-team/keras/blob/master/keras/preprocessing/image.py#L500">[source]</a></span></p>
+<h2 id="imagedatagenerator-class">ImageDataGenerator class</h2>
+<pre><code class="python">keras.preprocessing.image.ImageDataGenerator(featurewise_center=False, samplewise_center=False, featurewise_std_normalization=False, samplewise_std_normalization=False, zca_whitening=False, zca_epsilon=1e-06, rotation_range=0.0, width_shift_range=0.0, height_shift_range=0.0, brightness_range=None, shear_range=0.0, zoom_range=0.0, channel_shift_range=0.0, fill_mode='nearest', cval=0.0, horizontal_flip=False, vertical_flip=False, rescale=None, preprocessing_function=None, data_format=None, validation_split=0.0)
+</code></pre>
+
+<p>Generate batches of tensor image data with real-time data augmentation.
+The data will be looped over (in batches).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>featurewise_center</strong>: Boolean.
+    Set input mean to 0 over the dataset, feature-wise.</li>
+<li><strong>samplewise_center</strong>: Boolean. Set each sample mean to 0.</li>
+<li><strong>featurewise_std_normalization</strong>: Boolean.
+    Divide inputs by std of the dataset, feature-wise.</li>
+<li><strong>samplewise_std_normalization</strong>: Boolean. Divide each input by its std.</li>
+<li><strong>zca_epsilon</strong>: epsilon for ZCA whitening. Default is 1e-6.</li>
+<li><strong>zca_whitening</strong>: Boolean. Apply ZCA whitening.</li>
+<li><strong>rotation_range</strong>: Int. Degree range for random rotations.</li>
+<li><strong>width_shift_range</strong>: Float, 1-D array-like or int<ul>
+<li>float: fraction of total width, if &lt; 1, or pixels if &gt;= 1.</li>
+<li>1-D array-like: random elements from the array.</li>
+<li>int: integer number of pixels from interval
+    <code>(-width_shift_range, +width_shift_range)</code></li>
+<li>With <code>width_shift_range=2</code> possible values
+    are integers <code>[-1, 0, +1]</code>,
+    same as with <code>width_shift_range=[-1, 0, +1]</code>,
+    while with <code>width_shift_range=1.0</code> possible values are floats
+    in the interval [-1.0, +1.0).</li>
+</ul>
+</li>
+<li><strong>height_shift_range</strong>: Float, 1-D array-like or int<ul>
+<li>float: fraction of total height, if &lt; 1, or pixels if &gt;= 1.</li>
+<li>1-D array-like: random elements from the array.</li>
+<li>int: integer number of pixels from interval
+    <code>(-height_shift_range, +height_shift_range)</code></li>
+<li>With <code>height_shift_range=2</code> possible values
+    are integers <code>[-1, 0, +1]</code>,
+    same as with <code>height_shift_range=[-1, 0, +1]</code>,
+    while with <code>height_shift_range=1.0</code> possible values are floats
+    in the interval [-1.0, +1.0).</li>
+</ul>
+</li>
+<li><strong>shear_range</strong>: Float. Shear Intensity
+    (Shear angle in counter-clockwise direction in degrees)</li>
+<li><strong>zoom_range</strong>: Float or [lower, upper]. Range for random zoom.
+    If a float, <code>[lower, upper] = [1-zoom_range, 1+zoom_range]</code>.</li>
+<li><strong>channel_shift_range</strong>: Float. Range for random channel shifts.</li>
+<li><strong>fill_mode</strong>: One of {"constant", "nearest", "reflect" or "wrap"}.
+    Default is 'nearest'.
+    Points outside the boundaries of the input are filled
+    according to the given mode:<ul>
+<li>'constant': kkkkkkkk|abcd|kkkkkkkk (cval=k)</li>
+<li>'nearest':  aaaaaaaa|abcd|dddddddd</li>
+<li>'reflect':  abcddcba|abcd|dcbaabcd</li>
+<li>'wrap':  abcdabcd|abcd|abcdabcd</li>
+</ul>
+</li>
+<li><strong>cval</strong>: Float or Int.
+    Value used for points outside the boundaries
+    when <code>fill_mode = "constant"</code>.</li>
+<li><strong>horizontal_flip</strong>: Boolean. Randomly flip inputs horizontally.</li>
+<li><strong>vertical_flip</strong>: Boolean. Randomly flip inputs vertically.</li>
+<li><strong>rescale</strong>: rescaling factor. Defaults to None.
+    If None or 0, no rescaling is applied,
+    otherwise we multiply the data by the value provided
+    (before applying any other transformation).</li>
+<li><strong>preprocessing_function</strong>: function that will be implied on each input.
+    The function will run after the image is resized and augmented.
+    The function should take one argument:
+    one image (Numpy tensor with rank 3),
+    and should output a Numpy tensor with the same shape.</li>
+<li><strong>data_format</strong>: Image data format,
+    either "channels_first" or "channels_last".
+    "channels_last" mode means that the images should have shape
+    <code>(samples, height, width, channels)</code>,
+    "channels_first" mode means that the images should have shape
+    <code>(samples, channels, height, width)</code>.
+    It defaults to the <code>image_data_format</code> value found in your
+    Keras config file at <code>~/.keras/keras.json</code>.
+    If you never set it, then it will be "channels_last".</li>
+<li><strong>validation_split</strong>: Float. Fraction of images reserved for validation
+    (strictly between 0 and 1).</li>
+</ul>
+<p><strong>Examples</strong></p>
+<p>Example of using <code>.flow(x, y)</code>:</p>
+<pre><code class="python">(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+y_train = np_utils.to_categorical(y_train, num_classes)
+y_test = np_utils.to_categorical(y_test, num_classes)
+
+datagen = ImageDataGenerator(
+    featurewise_center=True,
+    featurewise_std_normalization=True,
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    horizontal_flip=True)
+
+# compute quantities required for featurewise normalization
+# (std, mean, and principal components if ZCA whitening is applied)
+datagen.fit(x_train)
+
+# fits the model on batches with real-time data augmentation:
+model.fit_generator(datagen.flow(x_train, y_train, batch_size=32),
+                    steps_per_epoch=len(x_train) / 32, epochs=epochs)
+
+# here's a more &quot;manual&quot; example
+for e in range(epochs):
+    print('Epoch', e)
+    batches = 0
+    for x_batch, y_batch in datagen.flow(x_train, y_train, batch_size=32):
+        model.fit(x_batch, y_batch)
+        batches += 1
+        if batches &gt;= len(x_train) / 32:
+            # we need to break the loop by hand because
+            # the generator loops indefinitely
+            break
+</code></pre>
+
+<p>Example of using <code>.flow_from_directory(directory)</code>:</p>
+<pre><code class="python">train_datagen = ImageDataGenerator(
+        rescale=1./255,
+        shear_range=0.2,
+        zoom_range=0.2,
+        horizontal_flip=True)
+
+test_datagen = ImageDataGenerator(rescale=1./255)
+
+train_generator = train_datagen.flow_from_directory(
+        'data/train',
+        target_size=(150, 150),
+        batch_size=32,
+        class_mode='binary')
+
+validation_generator = test_datagen.flow_from_directory(
+        'data/validation',
+        target_size=(150, 150),
+        batch_size=32,
+        class_mode='binary')
+
+model.fit_generator(
+        train_generator,
+        steps_per_epoch=2000,
+        epochs=50,
+        validation_data=validation_generator,
+        validation_steps=800)
+</code></pre>
+
+<p>Example of transforming images and masks together.</p>
+<pre><code class="python"># we create two instances with the same arguments
+data_gen_args = dict(featurewise_center=True,
+                     featurewise_std_normalization=True,
+                     rotation_range=90.,
+                     width_shift_range=0.1,
+                     height_shift_range=0.1,
+                     zoom_range=0.2)
+image_datagen = ImageDataGenerator(**data_gen_args)
+mask_datagen = ImageDataGenerator(**data_gen_args)
+
+# Provide the same seed and keyword arguments to the fit and flow methods
+seed = 1
+image_datagen.fit(images, augment=True, seed=seed)
+mask_datagen.fit(masks, augment=True, seed=seed)
+
+image_generator = image_datagen.flow_from_directory(
+    'data/images',
+    class_mode=None,
+    seed=seed)
+
+mask_generator = mask_datagen.flow_from_directory(
+    'data/masks',
+    class_mode=None,
+    seed=seed)
+
+# combine generators into one which yields image and masks
+train_generator = zip(image_generator, mask_generator)
+
+model.fit_generator(
+    train_generator,
+    steps_per_epoch=2000,
+    epochs=50)
+</code></pre>
+
+<hr />
+<h2 id="imagedatagenerator-methods">ImageDataGenerator methods</h2>
+<h3 id="apply_transform">apply_transform</h3>
+<pre><code class="python">keras.preprocessing.image.apply_transform(x, transform_parameters)
+</code></pre>
+
+<p>Applies a transformation to an image according to given parameters.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: 3D tensor, single image.</li>
+<li><strong>transform_parameters</strong>: Dictionary with string - parameter pairs
+    describing the transformation.
+    Currently, the following parameters
+    from the dictionary are used:<ul>
+<li><code>'theta'</code>: Float. Rotation angle in degrees.</li>
+<li><code>'tx'</code>: Float. Shift in the x direction.</li>
+<li><code>'ty'</code>: Float. Shift in the y direction.</li>
+<li><code>'shear'</code>: Float. Shear angle in degrees.</li>
+<li><code>'zx'</code>: Float. Zoom in the x direction.</li>
+<li><code>'zy'</code>: Float. Zoom in the y direction.</li>
+<li><code>'flip_horizontal'</code>: Boolean. Horizontal flip.</li>
+<li><code>'flip_vertical'</code>: Boolean. Vertical flip.</li>
+<li><code>'channel_shift_intencity'</code>: Float. Channel shift intensity.</li>
+<li><code>'brightness'</code>: Float. Brightness shift intensity.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A ransformed version of the input (same shape).</p>
+<hr />
+<h3 id="fit">fit</h3>
+<pre><code class="python">keras.preprocessing.image.fit(x, augment=False, rounds=1, seed=None)
+</code></pre>
+
+<p>Fits the data generator to some sample data.</p>
+<p>This computes the internal data stats related to the
+data-dependent transformations, based on an array of sample data.</p>
+<p>Only required if <code>featurewise_center</code> or
+<code>featurewise_std_normalization</code> or <code>zca_whitening</code> are set to True.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Sample data. Should have rank 4.
+ In case of grayscale data,
+ the channels axis should have value 1, and in case
+ of RGB data, it should have value 3.</li>
+<li><strong>augment</strong>: Boolean (default: False).
+    Whether to fit on randomly augmented samples.</li>
+<li><strong>rounds</strong>: Int (default: 1).
+    If using data augmentation (<code>augment=True</code>),
+    this is how many augmentation passes over the data to use.</li>
+<li><strong>seed</strong>: Int (default: None). Random seed.</li>
+</ul>
+<hr />
+<h3 id="flow">flow</h3>
+<pre><code class="python">keras.preprocessing.image.flow(x, y=None, batch_size=32, shuffle=True, sample_weight=None, seed=None, save_to_dir=None, save_prefix='', save_format='png', subset=None)
+</code></pre>
+
+<p>Takes data &amp; label arrays, generates batches of augmented data.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Input data. Numpy array of rank 4 or a tuple.
+    If tuple, the first element
+    should contain the images and the second element
+    another numpy array or a list of numpy arrays
+    that gets passed to the output
+    without any modifications.
+    Can be used to feed the model miscellaneous data
+    along with the images.
+    In case of grayscale data, the channels axis of the image array
+    should have value 1, and in case
+    of RGB data, it should have value 3.</li>
+<li><strong>y</strong>: Labels.</li>
+<li><strong>batch_size</strong>: Int (default: 32).</li>
+<li><strong>shuffle</strong>: Boolean (default: True).</li>
+<li><strong>sample_weight</strong>: Sample weights.</li>
+<li><strong>seed</strong>: Int (default: None).</li>
+<li><strong>save_to_dir</strong>: None or str (default: None).
+    This allows you to optionally specify a directory
+    to which to save the augmented pictures being generated
+    (useful for visualizing what you are doing).</li>
+<li><strong>save_prefix</strong>: Str (default: <code>''</code>).
+    Prefix to use for filenames of saved pictures
+    (only relevant if <code>save_to_dir</code> is set).
+    save_format: one of "png", "jpeg"
+    (only relevant if <code>save_to_dir</code> is set). Default: "png".</li>
+<li><strong>subset</strong>: Subset of data (<code>"training"</code> or <code>"validation"</code>) if
+    <code>validation_split</code> is set in <code>ImageDataGenerator</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>An <code>Iterator</code> yielding tuples of <code>(x, y)</code>
+    where <code>x</code> is a numpy array of image data
+    (in the case of a single image input) or a list
+    of numpy arrays (in the case with
+    additional inputs) and <code>y</code> is a numpy array
+    of corresponding labels. If 'sample_weight' is not None,
+    the yielded tuples are of the form <code>(x, y, sample_weight)</code>.
+    If <code>y</code> is None, only the numpy array <code>x</code> is returned.</p>
+<hr />
+<h3 id="flow_from_directory">flow_from_directory</h3>
+<pre><code class="python">keras.preprocessing.image.flow_from_directory(directory, target_size=(256, 256), color_mode='rgb', classes=None, class_mode='categorical', batch_size=32, shuffle=True, seed=None, save_to_dir=None, save_prefix='', save_format='png', follow_links=False, subset=None, interpolation='nearest')
+</code></pre>
+
+<p>Takes the path to a directory &amp; generates batches of augmented data.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>directory</strong>: Path to the target directory.
+    It should contain one subdirectory per class.
+    Any PNG, JPG, BMP, PPM or TIF images
+    inside each of the subdirectories directory tree
+    will be included in the generator.
+    See <a href="https://gist.github.com/fchollet/        0830affa1f7f19fd47b06d4cf89ed44d">this script</a>
+    for more details.</li>
+<li><strong>target_size</strong>: Tuple of integers <code>(height, width)</code>,
+    default: <code>(256, 256)</code>.
+    The dimensions to which all images found will be resized.</li>
+<li><strong>color_mode</strong>: One of "grayscale", "rbg". Default: "rgb".
+    Whether the images will be converted to
+    have 1 or 3 color channels.</li>
+<li><strong>classes</strong>: Optional list of class subdirectories
+    (e.g. <code>['dogs', 'cats']</code>). Default: None.
+    If not provided, the list of classes will be automatically
+    inferred from the subdirectory names/structure
+    under <code>directory</code>, where each subdirectory will
+    be treated as a different class
+    (and the order of the classes, which will map to the label
+    indices, will be alphanumeric).
+    The dictionary containing the mapping from class names to class
+    indices can be obtained via the attribute <code>class_indices</code>.</li>
+<li><strong>class_mode</strong>: One of "categorical", "binary", "sparse",
+    "input", or None. Default: "categorical".
+    Determines the type of label arrays that are returned:<ul>
+<li>"categorical" will be 2D one-hot encoded labels,</li>
+<li>"binary" will be 1D binary labels,
+    "sparse" will be 1D integer labels,</li>
+<li>"input" will be images identical
+    to input images (mainly used to work with autoencoders).</li>
+<li>If None, no labels are returned
+  (the generator will only yield batches of image data,
+  which is useful to use with <code>model.predict_generator()</code>,
+  <code>model.evaluate_generator()</code>, etc.).
+  Please note that in case of class_mode None,
+  the data still needs to reside in a subdirectory
+  of <code>directory</code> for it to work correctly.</li>
+</ul>
+</li>
+<li><strong>batch_size</strong>: Size of the batches of data (default: 32).</li>
+<li><strong>shuffle</strong>: Whether to shuffle the data (default: True)</li>
+<li><strong>seed</strong>: Optional random seed for shuffling and transformations.</li>
+<li><strong>save_to_dir</strong>: None or str (default: None).
+    This allows you to optionally specify
+    a directory to which to save
+    the augmented pictures being generated
+    (useful for visualizing what you are doing).</li>
+<li><strong>save_prefix</strong>: Str. Prefix to use for filenames of saved pictures
+    (only relevant if <code>save_to_dir</code> is set).</li>
+<li><strong>save_format</strong>: One of "png", "jpeg"
+    (only relevant if <code>save_to_dir</code> is set). Default: "png".</li>
+<li><strong>follow_links</strong>: Whether to follow symlinks inside
+    class subdirectories (default: False).</li>
+<li><strong>subset</strong>: Subset of data (<code>"training"</code> or <code>"validation"</code>) if
+    <code>validation_split</code> is set in <code>ImageDataGenerator</code>.</li>
+<li><strong>interpolation</strong>: Interpolation method used to
+    resample the image if the
+    target size is different from that of the loaded image.
+    Supported methods are <code>"nearest"</code>, <code>"bilinear"</code>,
+    and <code>"bicubic"</code>.
+    If PIL version 1.1.3 or newer is installed, <code>"lanczos"</code> is also
+    supported. If PIL version 3.4.0 or newer is installed,
+    <code>"box"</code> and <code>"hamming"</code> are also supported.
+    By default, <code>"nearest"</code> is used.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A <code>DirectoryIterator</code> yielding tuples of <code>(x, y)</code>
+    where <code>x</code> is a numpy array containing a batch
+    of images with shape <code>(batch_size, *target_size, channels)</code>
+    and <code>y</code> is a numpy array of corresponding labels.</p>
+<hr />
+<h3 id="get_random_transform">get_random_transform</h3>
+<pre><code class="python">keras.preprocessing.image.get_random_transform(img_shape, seed=None)
+</code></pre>
+
+<p>Generates random parameters for a transformation.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>seed</strong>: Random seed.</li>
+<li><strong>img_shape</strong>: Tuple of integers.
+    Shape of the image that is transformed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A dictionary containing randomly chosen parameters describing the
+transformation.</p>
+<hr />
+<h3 id="random_transform">random_transform</h3>
+<pre><code class="python">keras.preprocessing.image.random_transform(x, seed=None)
+</code></pre>
+
+<p>Applies a random transformation to an image.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: 3D tensor, single image.</li>
+<li><strong>seed</strong>: Random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A randomly transformed version of the input (same shape).</p>
+<hr />
+<h3 id="standardize">standardize</h3>
+<pre><code class="python">keras.preprocessing.image.standardize(x)
+</code></pre>
+
+<p>Applies the normalization configuration to a batch of inputs.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Batch of inputs to be normalized.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The inputs, normalized.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../losses/index.html" class="btn btn-neutral float-right" title="Losses"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../text/index.html" class="btn btn-neutral" title="Text Preprocessing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../text/index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../losses/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+
+<!-- Mirrored from keras.io/preprocessing/image/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:16:28 GMT -->
+</html>

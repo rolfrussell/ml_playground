@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:17:57 GMT -->
+<head>
+        <title>Using pre-trained word embeddings in a Keras model</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="theme/css/pygment.css" type="text/css" />
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Source+Sans+Pro:400,700|Inconsolata:400,700" rel="stylesheet" type="text/css">
+        <link href="index.html" type="application/atom+xml" rel="alternate" title="The Keras Blog ATOM Feed" />
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="//blog.keras.io/css/ie.css"/>
+                <script src="//blog.keras.io/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="//blog.keras.io/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1>
+                    <a href="index-2.html">The Keras Blog </a>
+                </h1>
+                <p id="side">
+                    <a href="https://github.com/fchollet/keras">Keras</a> is a Deep Learning library for Python, that is simple, modular, and extensible.
+                </p>
+                <nav><ul>
+                <li><a href="index.html">Archives</a></li>
+                    <li >
+                        <a href="https://github.com/fchollet/keras">Github</a>
+                    </li>
+                    <li >
+                        <a href="../keras.io/index.html">Documentation</a>
+                    </li>
+                    <li >
+                        <a href="https://groups.google.com/forum/#!forum/keras-users">Google Group</a>
+                    </li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<section id="content" class="body">
+<article>
+        <header> <h1 class="entry-title"><a href="using-pre-trained-word-embeddings-in-a-keras-model.html"
+        rel="bookmark" title="Permalink to Using pre-trained word embeddings in a Keras model">Using pre-trained word embeddings in a Keras model</a></h1>  </header>
+        <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-07-16T00:00:00+02:00">
+                Sat 16 July 2016
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="https://twitter.com/fchollet">Francois Chollet</a>
+        </address>
+<p>In <a href="category/tutorials.html">Tutorials</a>. </p>
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+        <p>In this tutorial, we will walk you through the process of solving a text classification problem using pre-trained word embeddings and a convolutional neural network.</p>
+<p>The full code for this tutorial is <a href="https://github.com/fchollet/keras/blob/master/examples/pretrained_word_embeddings.py">available on Github</a>.</p>
+<p><strong>Note: all code examples have been updated to the Keras 2.0 API on March 14, 2017. You will need Keras version 2.0.0 or higher to run them.</strong></p>
+<hr />
+<h2>What are word embeddings?</h2>
+<p>"Word embeddings" are a family of natural language processing techniques aiming at mapping semantic meaning into a geometric space. This is done by associating a numeric vector to every word in a dictionary, such that the distance (e.g. L2 distance or more commonly cosine distance) between any two vectors would capture part of the semantic relationship between the two associated words. The geometric space formed by these vectors is called an <em>embedding space</em>.</p>
+<p>For instance, "coconut" and "polar bear" are words that are semantically quite different, so a reasonable embedding space would represent them as vectors that would be very far apart. But "kitchen" and "dinner" are related words, so they should be embedded close to each other.</p>
+<p>Ideally, in a good embeddings space, the "path" (a vector) to go from "kitchen" and "dinner" would capture precisely the semantic relationship between these two concepts. In this case the relationship is "where x occurs", so you would expect the vector <code>kitchen - dinner</code> (difference of the two embedding vectors, i.e. path to go from dinner to kitchen) to capture this "where x occurs" relationship. Basically, we should have the vectorial identity: <code>dinner + (where x occurs) = kitchen</code> (at least approximately). If that's indeed the case, then we can use such a relationship vector to answer questions. For instance, starting from a new vector, e.g. "work", and applying this relationship vector, we should get sometime meaningful, e.g. <code>work + (where x occurs) = office</code>, answering "where does work occur?".</p>
+<p>Word embeddings are computed by applying dimensionality reduction techniques to datasets of co-occurence statistics between words in a corpus of text. This can be done via neural networks (the "word2vec" technique), or via matrix factorization.</p>
+<hr />
+<h2>GloVe word embeddings</h2>
+<p>We will be using GloVe embeddings, which you can read about <a href="http://nlp.stanford.edu/projects/glove/">here</a>. GloVe stands for "Global Vectors for Word Representation". It's a somewhat popular embedding technique based on factorizing a matrix of word co-occurence statistics.</p>
+<p>Specifically, we will use the 100-dimensional GloVe embeddings of 400k words computed on a 2014 dump of English Wikipedia. You can download them <a href="http://nlp.stanford.edu/data/glove.6B.zip">here</a> (warning: following this link will start a 822MB download).</p>
+<hr />
+<h2>20 Newsgroup dataset</h2>
+<p>The task we will try to solve will be to classify posts coming from 20 different newsgroup, into their original 20 categories --the infamous "20 Newsgroup dataset". You can read about the dataset and download the raw text data <a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/project/theo-20/www/data/news20.html">here</a>.</p>
+<p>Categories are fairly semantically distinct and thus will have quite different words associated with them. Here are a few sample categories:</p>
+<div class="highlight"><pre><span></span>comp.sys.ibm.pc.hardware
+comp.graphics
+comp.os.ms-windows.misc
+comp.sys.mac.hardware
+comp.windows.x
+
+rec.autos
+rec.motorcycles
+rec.sport.baseball
+rec.sport.hockey
+</pre></div>
+
+
+<hr />
+<h2>Approach</h2>
+<p>Here's how we will solve the classification problem:</p>
+<ul>
+<li>convert all text samples in the dataset into sequences of word indices. A "word index" would simply be an integer ID for the word. We will only consider the top 20,000 most commonly occuring words in the dataset, and we will truncate the sequences to a maximum length of 1000 words.</li>
+<li>prepare an "embedding matrix" which will contain at index <code>i</code> the embedding vector for the word of index <code>i</code> in our word index.</li>
+<li>load this embedding matrix into a Keras <code>Embedding</code> layer, set to be frozen (its weights, the embedding vectors, will not be updated during training).</li>
+<li>build on top of it a 1D convolutional neural network, ending in a softmax output over our 20 categories.</li>
+</ul>
+<hr />
+<h2>Preparing the text data</h2>
+<p>First, we will simply iterate over the folders in which our text samples are stored, and format them into a list of samples. We will also prepare at the same time a list of class indices matching the samples:</p>
+<div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of text samples</span>
+<span class="n">labels_index</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># dictionary mapping label name to numeric id</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of label ids</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">TEXT_DATA_DIR</span><span class="p">)):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEXT_DATA_DIR</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">label_id</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels_index</span><span class="p">)</span>
+        <span class="n">labels_index</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_id</span>
+        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">fname</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># skip header</span>
+                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+                <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_id</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Found </span><span class="si">%s</span><span class="s1"> texts.&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Then we can format our text samples and labels into tensors that can be fed into a neural network. To do this, we will rely on Keras utilities <code>keras.preprocessing.text.Tokenizer</code> and <code>keras.preprocessing.sequence.pad_sequences</code>.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">pad_sequences</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">nb_words</span><span class="o">=</span><span class="n">MAX_NB_WORDS</span><span class="p">)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="n">sequences</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="n">word_index</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Found </span><span class="si">%s</span><span class="s1"> unique tokens.&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_index</span><span class="p">))</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pad_sequences</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Shape of data tensor:&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Shape of label tensor:&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># split the data into a training set and a validation set</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="n">nb_validation_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">VALIDATION_SPLIT</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="n">nb_validation_samples</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[:</span><span class="o">-</span><span class="n">nb_validation_samples</span><span class="p">]</span>
+<span class="n">x_val</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="n">nb_validation_samples</span><span class="p">:]</span>
+<span class="n">y_val</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="n">nb_validation_samples</span><span class="p">:]</span>
+</pre></div>
+
+
+<hr />
+<h2>Preparing the Embedding layer</h2>
+<p>Next, we compute an index mapping words to known embeddings, by parsing the data dump of pre-trained embeddings:</p>
+<div class="highlight"><pre><span></span><span class="n">embeddings_index</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">GLOVE_DIR</span><span class="p">,</span> <span class="s1">&#39;glove.6B.100d.txt&#39;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">embeddings_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">coefs</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Found </span><span class="si">%s</span><span class="s1"> word vectors.&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">embeddings_index</span><span class="p">))</span>
+</pre></div>
+
+
+<p>At this point we can leverage our <code>embedding_index</code> dictionary and our <code>word_index</code> to compute our embedding matrix:</p>
+<div class="highlight"><pre><span></span><span class="n">embedding_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">EMBEDDING_DIM</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">embedding_vector</span> <span class="o">=</span> <span class="n">embeddings_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">embedding_vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># words not found in embedding index will be all-zeros.</span>
+        <span class="n">embedding_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">embedding_vector</span>
+</pre></div>
+
+
+<p>We load this embedding matrix into an <code>Embedding</code> layer. Note that we set <code>trainable=False</code> to prevent the weights from being updated during training.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Embedding</span>
+
+<span class="n">embedding_layer</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">EMBEDDING_DIM</span><span class="p">,</span>
+                            <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="n">embedding_matrix</span><span class="p">],</span>
+                            <span class="n">input_length</span><span class="o">=</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">,</span>
+                            <span class="n">trainable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>An <code>Embedding</code> layer should be fed sequences of integers, i.e. a 2D input of shape <code>(samples, indices)</code>. These input sequences should be padded so that they all have the same length in a batch of input data (although an <code>Embedding</code> layer is capable of processing sequence of heterogenous length, if you don't pass an explicit <code>input_length</code> argument to the layer).</p>
+<p>All that the <code>Embedding</code> layer does is to map the integer inputs to the vectors found at the corresponding index in the embedding matrix, i.e. the sequence <code>[1, 2]</code> would be converted to <code>[embeddings[1], embeddings[2]]</code>. This means that the output of the <code>Embedding</code> layer will be a 3D tensor of shape <code>(samples, sequence_length, embedding_dim)</code>.</p>
+<hr />
+<h2>Training a 1D convnet</h2>
+<p>Finally we can then build a small 1D convnet to solve our classification problem:</p>
+<div class="highlight"><pre><span></span><span class="n">sequence_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+<span class="n">embedded_sequences</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="p">(</span><span class="n">sequence_input</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">embedded_sequences</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="mi">5</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="mi">5</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv1D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling1D</span><span class="p">(</span><span class="mi">35</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># global max pooling</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_index</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">sequence_input</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">])</span>
+
+<span class="c1"># happy learning!</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">),</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This model reaches <strong>95% classification accuracy</strong> on the validation set after only 2 epochs. You could probably get to an even higher accuracy by training longer with some regularization mechanism (such as dropout) or by fine-tuning the <code>Embedding</code> layer.</p>
+<p>We can also test how well we would have performed by not using pre-trained word embeddings, but instead initializing our <code>Embedding</code> layer from scratch and learning its weights during training. We just need to replace our <code>Embedding</code> layer with the following:</p>
+<div class="highlight"><pre><span></span><span class="n">embedding_layer</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">EMBEDDING_DIM</span><span class="p">,</span>
+                            <span class="n">input_length</span><span class="o">=</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">)</span>
+</pre></div>
+
+
+<p>After 2 epochs, this approach only gets us to <strong>90% validation accuracy</strong>, less than what the previous model could reach in just one epoch. Our pre-trained embeddings were definitely buying us something. In general, using pre-trained embeddings is relevant for natural processing tasks were little training data is available (functionally the embeddings act as an injection of outside information which might prove useful for your model).</p>
+        </div><!-- /.entry-content -->
+
+</article>
+</section>
+
+        <footer id="footer" class="body">
+                <address id="about" class="vcard body">
+                Powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>, which takes great advantages of <a href="http://python.org/">python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#footer -->
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-61785484-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
+
+<!-- Mirrored from blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:17:57 GMT -->
+</html>

@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from keras.io/backend/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:16:29 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Backend - Keras Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Source+Sans+Pro:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Backend";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-61785484-1', 'keras.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <a href="../index.html"><div class="keras-logo">
+        <img src="../img/keras-logo-small-2018.jpg" class="keras-logo-img">
+        Keras Documentation
+      </div></a>
+      <div class="wy-side-nav-search">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="https://keras.io/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../index.html">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../why-use-keras/index.html">Why use Keras</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Getting started</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../getting-started/sequential-model-guide/index.html">Guide to the Sequential model</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../getting-started/functional-api-guide/index.html">Guide to the Functional API</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../getting-started/faq/index.html">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Models</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../models/about-keras-models/index.html">About Keras models</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../models/sequential/index.html">Sequential</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../models/model/index.html">Model (functional API)</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Layers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/about-keras-layers/index.html">About Keras layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/core/index.html">Core Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/convolutional/index.html">Convolutional Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/pooling/index.html">Pooling Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/local/index.html">Locally-connected Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/recurrent/index.html">Recurrent Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/embeddings/index.html">Embedding Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/merge/index.html">Merge Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/advanced-activations/index.html">Advanced Activations Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/normalization/index.html">Normalization Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/noise/index.html">Noise layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/wrappers/index.html">Layer wrappers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../layers/writing-your-own-keras-layers/index.html">Writing your own Keras layers</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Preprocessing</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../preprocessing/sequence/index.html">Sequence Preprocessing</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../preprocessing/text/index.html">Text Preprocessing</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../preprocessing/image/index.html">Image Preprocessing</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../losses/index.html">Losses</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../metrics/index.html">Metrics</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../optimizers/index.html">Optimizers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../activations/index.html">Activations</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../callbacks/index.html">Callbacks</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../datasets/index.html">Datasets</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../applications/index.html">Applications</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="index.html">Backend</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#keras-backends">Keras backends</a></li>
+                
+                    <li><a class="toctree-l4" href="#what-is-a-backend">What is a "backend"?</a></li>
+                
+                    <li><a class="toctree-l4" href="#switching-from-one-backend-to-another">Switching from one backend to another</a></li>
+                
+                    <li><a class="toctree-l4" href="#kerasjson-details">keras.json details</a></li>
+                
+                    <li><a class="toctree-l4" href="#using-the-abstract-keras-backend-to-write-new-code">Using the abstract Keras backend to write new code</a></li>
+                
+                    <li><a class="toctree-l4" href="#backend-functions">Backend functions</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../initializers/index.html">Initializers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../regularizers/index.html">Regularizers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../constraints/index.html">Constraints</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../visualization/index.html">Visualization</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../scikit-learn-api/index.html">Scikit-learn API</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../utils/index.html">Utils</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../contributing/index.html">Contributing</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Keras Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Backend</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/keras-team/keras" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="keras-backends">Keras backends</h1>
+<h2 id="what-is-a-backend">What is a "backend"?</h2>
+<p>Keras is a model-level library, providing high-level building blocks for developing deep learning models. It does not handle itself low-level operations such as tensor products, convolutions and so on. Instead, it relies on a specialized, well-optimized tensor manipulation library to do so, serving as the "backend engine" of Keras. Rather than picking one single tensor library and making the implementation of Keras tied to that library, Keras handles the problem in a modular way, and several different backend engines can be plugged seamlessly into Keras.</p>
+<p>At this time, Keras has three backend implementations available: the <strong>TensorFlow</strong> backend, the <strong>Theano</strong> backend, and the <strong>CNTK</strong> backend.</p>
+<ul>
+<li><a href="http://www.tensorflow.org/">TensorFlow</a> is an open-source symbolic tensor manipulation framework developed by Google.</li>
+<li><a href="http://deeplearning.net/software/theano/">Theano</a> is an open-source symbolic tensor manipulation framework developed by LISA Lab at Université de Montréal.</li>
+<li><a href="https://www.microsoft.com/en-us/cognitive-toolkit/">CNTK</a> is an open-source toolkit for deep learning developed by Microsoft.</li>
+</ul>
+<p>In the future, we are likely to add more backend options.</p>
+<hr />
+<h2 id="switching-from-one-backend-to-another">Switching from one backend to another</h2>
+<p>If you have run Keras at least once, you will find the Keras configuration file at:</p>
+<p><code>$HOME/.keras/keras.json</code></p>
+<p>If it isn't there, you can create it.</p>
+<p><strong>NOTE for Windows Users:</strong> Please replace <code>$HOME</code> with <code>%USERPROFILE%</code>.</p>
+<p>The default configuration file looks like this:</p>
+<pre><code>{
+    &quot;image_data_format&quot;: &quot;channels_last&quot;,
+    &quot;epsilon&quot;: 1e-07,
+    &quot;floatx&quot;: &quot;float32&quot;,
+    &quot;backend&quot;: &quot;tensorflow&quot;
+}
+</code></pre>
+
+<p>Simply change the field <code>backend</code> to <code>"theano"</code>, <code>"tensorflow"</code>, or <code>"cntk"</code>, and Keras will use the new configuration next time you run any Keras code.</p>
+<p>You can also define the environment variable <code>KERAS_BACKEND</code> and this will
+override what is defined in your config file :</p>
+<pre><code class="bash">KERAS_BACKEND=tensorflow python -c &quot;from keras import backend&quot;
+Using TensorFlow backend.
+</code></pre>
+
+<hr />
+<h2 id="kerasjson-details">keras.json details</h2>
+<p>The <code>keras.json</code> configuration file contains the following settings:</p>
+<pre><code>{
+    &quot;image_data_format&quot;: &quot;channels_last&quot;,
+    &quot;epsilon&quot;: 1e-07,
+    &quot;floatx&quot;: &quot;float32&quot;,
+    &quot;backend&quot;: &quot;tensorflow&quot;
+}
+</code></pre>
+
+<p>You can change these settings by editing <code>$HOME/.keras/keras.json</code>. </p>
+<ul>
+<li><code>image_data_format</code>: String, either <code>"channels_last"</code> or <code>"channels_first"</code>. It specifies which data format convention Keras will follow. (<code>keras.backend.image_data_format()</code> returns it.)</li>
+<li>For 2D data (e.g. image), <code>"channels_last"</code> assumes <code>(rows, cols, channels)</code> while <code>"channels_first"</code> assumes <code>(channels, rows, cols)</code>. </li>
+<li>For 3D data, <code>"channels_last"</code> assumes <code>(conv_dim1, conv_dim2, conv_dim3, channels)</code> while <code>"channels_first"</code> assumes <code>(channels, conv_dim1, conv_dim2, conv_dim3)</code>.</li>
+<li><code>epsilon</code>: Float, a numeric fuzzing constant used to avoid dividing by zero in some operations.</li>
+<li><code>floatx</code>: String, <code>"float16"</code>, <code>"float32"</code>, or <code>"float64"</code>. Default float precision.</li>
+<li><code>backend</code>: String, <code>"tensorflow"</code>, <code>"theano"</code>, or <code>"cntk"</code>.</li>
+</ul>
+<hr />
+<h2 id="using-the-abstract-keras-backend-to-write-new-code">Using the abstract Keras backend to write new code</h2>
+<p>If you want the Keras modules you write to be compatible with both Theano (<code>th</code>) and TensorFlow (<code>tf</code>), you have to write them via the abstract Keras backend API. Here's an intro.</p>
+<p>You can import the backend module via:</p>
+<pre><code class="python">from keras import backend as K
+</code></pre>
+
+<p>The code below instantiates an input placeholder. It's equivalent to <code>tf.placeholder()</code> or <code>th.tensor.matrix()</code>, <code>th.tensor.tensor3()</code>, etc.</p>
+<pre><code class="python">inputs = K.placeholder(shape=(2, 4, 5))
+# also works:
+inputs = K.placeholder(shape=(None, 4, 5))
+# also works:
+inputs = K.placeholder(ndim=3)
+</code></pre>
+
+<p>The code below instantiates a variable. It's equivalent to <code>tf.Variable()</code> or <code>th.shared()</code>.</p>
+<pre><code class="python">import numpy as np
+val = np.random.random((3, 4, 5))
+var = K.variable(value=val)
+
+# all-zeros variable:
+var = K.zeros(shape=(3, 4, 5))
+# all-ones:
+var = K.ones(shape=(3, 4, 5))
+</code></pre>
+
+<p>Most tensor operations you will need can be done as you would in TensorFlow or Theano:</p>
+<pre><code class="python"># Initializing Tensors with Random Numbers
+b = K.random_uniform_variable(shape=(3, 4), low=0, high=1) # Uniform distribution
+c = K.random_normal_variable(shape=(3, 4), mean=0, scale=1) # Gaussian distribution
+d = K.random_normal_variable(shape=(3, 4), mean=0, scale=1)
+
+# Tensor Arithmetic
+a = b + c * K.abs(d)
+c = K.dot(a, K.transpose(b))
+a = K.sum(b, axis=1)
+a = K.softmax(b)
+a = K.concatenate([b, c], axis=-1)
+# etc...
+</code></pre>
+
+<hr />
+<h2 id="backend-functions">Backend functions</h2>
+<h3 id="epsilon">epsilon</h3>
+<pre><code class="python">keras.backend.epsilon()
+</code></pre>
+
+<p>Returns the value of the fuzz factor used in numeric expressions.</p>
+<p><strong>Returns</strong></p>
+<p>A float.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; keras.backend.epsilon()
+1e-07
+</code></pre>
+
+<hr />
+<h3 id="set_epsilon">set_epsilon</h3>
+<pre><code class="python">keras.backend.set_epsilon(e)
+</code></pre>
+
+<p>Sets the value of the fuzz factor used in numeric expressions.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>e</strong>: float. New value of epsilon.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; K.epsilon()
+1e-07
+&gt;&gt;&gt; K.set_epsilon(1e-05)
+&gt;&gt;&gt; K.epsilon()
+1e-05
+</code></pre>
+
+<hr />
+<h3 id="floatx">floatx</h3>
+<pre><code class="python">keras.backend.floatx()
+</code></pre>
+
+<p>Returns the default float type, as a string.
+(e.g. 'float16', 'float32', 'float64').</p>
+<p><strong>Returns</strong></p>
+<p>String, the current default float type.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; keras.backend.floatx()
+'float32'
+</code></pre>
+
+<hr />
+<h3 id="set_floatx">set_floatx</h3>
+<pre><code class="python">keras.backend.set_floatx(floatx)
+</code></pre>
+
+<p>Sets the default float type.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>floatx</strong>: String, 'float16', 'float32', or 'float64'.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; K.floatx()
+'float32'
+&gt;&gt;&gt; K.set_floatx('float16')
+&gt;&gt;&gt; K.floatx()
+'float16'
+</code></pre>
+
+<hr />
+<h3 id="cast_to_floatx">cast_to_floatx</h3>
+<pre><code class="python">keras.backend.cast_to_floatx(x)
+</code></pre>
+
+<p>Cast a Numpy array to the default Keras float type.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Numpy array.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The same Numpy array, cast to its new type.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; K.floatx()
+'float32'
+&gt;&gt;&gt; arr = numpy.array([1.0, 2.0], dtype='float64')
+&gt;&gt;&gt; arr.dtype
+dtype('float64')
+&gt;&gt;&gt; new_arr = K.cast_to_floatx(arr)
+&gt;&gt;&gt; new_arr
+array([ 1.,  2.], dtype=float32)
+&gt;&gt;&gt; new_arr.dtype
+dtype('float32')
+</code></pre>
+
+<hr />
+<h3 id="image_data_format">image_data_format</h3>
+<pre><code class="python">keras.backend.image_data_format()
+</code></pre>
+
+<p>Returns the default image data format convention ('channels_first' or 'channels_last').</p>
+<p><strong>Returns</strong></p>
+<p>A string, either <code>'channels_first'</code> or <code>'channels_last'</code></p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; keras.backend.image_data_format()
+'channels_first'
+</code></pre>
+
+<hr />
+<h3 id="set_image_data_format">set_image_data_format</h3>
+<pre><code class="python">keras.backend.set_image_data_format(data_format)
+</code></pre>
+
+<p>Sets the value of the data format convention.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>data_format</strong>: string. <code>'channels_first'</code> or <code>'channels_last'</code>.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; K.image_data_format()
+'channels_first'
+&gt;&gt;&gt; K.set_image_data_format('channels_last')
+&gt;&gt;&gt; K.image_data_format()
+'channels_last'
+</code></pre>
+
+<hr />
+<h3 id="get_uid">get_uid</h3>
+<pre><code class="python">keras.backend.get_uid(prefix='')
+</code></pre>
+
+<p>Get the uid for the default graph.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>prefix</strong>: An optional prefix of the graph.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A unique identifier for the graph.</p>
+<hr />
+<h3 id="reset_uids">reset_uids</h3>
+<pre><code class="python">keras.backend.reset_uids()
+</code></pre>
+
+<p>Resets graph identifiers.</p>
+<hr />
+<h3 id="clear_session">clear_session</h3>
+<pre><code class="python">keras.backend.clear_session()
+</code></pre>
+
+<p>Destroys the current TF graph and creates a new one.</p>
+<p>Useful to avoid clutter from old models / layers.</p>
+<hr />
+<h3 id="manual_variable_initialization">manual_variable_initialization</h3>
+<pre><code class="python">keras.backend.manual_variable_initialization(value)
+</code></pre>
+
+<p>Sets the manual variable initialization flag.</p>
+<p>This boolean flag determines whether
+variables should be initialized
+as they are instantiated (default), or if
+the user should handle the initialization
+(e.g. via <code>tf.initialize_all_variables()</code>).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>value</strong>: Python boolean.</li>
+</ul>
+<hr />
+<h3 id="learning_phase">learning_phase</h3>
+<pre><code class="python">keras.backend.learning_phase()
+</code></pre>
+
+<p>Returns the learning phase flag.</p>
+<p>The learning phase flag is a bool tensor (0 = test, 1 = train)
+to be passed as input to any Keras function
+that uses a different behavior at train time and test time.</p>
+<p><strong>Returns</strong></p>
+<p>Learning phase (scalar integer tensor or Python integer).</p>
+<hr />
+<h3 id="set_learning_phase">set_learning_phase</h3>
+<pre><code class="python">keras.backend.set_learning_phase(value)
+</code></pre>
+
+<p>Sets the learning phase to a fixed value.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>value</strong>: Learning phase value, either 0 or 1 (integers).</li>
+</ul>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>value</code> is neither <code>0</code> nor <code>1</code>.</li>
+</ul>
+<hr />
+<h3 id="is_sparse">is_sparse</h3>
+<pre><code class="python">keras.backend.is_sparse(tensor)
+</code></pre>
+
+<p>Returns whether a tensor is a sparse tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>tensor</strong>: A tensor instance.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A boolean.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; a = K.placeholder((2, 2), sparse=False)
+&gt;&gt;&gt; print(K.is_sparse(a))
+False
+&gt;&gt;&gt; b = K.placeholder((2, 2), sparse=True)
+&gt;&gt;&gt; print(K.is_sparse(b))
+True
+</code></pre>
+
+<hr />
+<h3 id="to_dense">to_dense</h3>
+<pre><code class="python">keras.backend.to_dense(tensor)
+</code></pre>
+
+<p>Converts a sparse tensor into a dense tensor and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>tensor</strong>: A tensor instance (potentially sparse).</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A dense tensor.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; b = K.placeholder((2, 2), sparse=True)
+&gt;&gt;&gt; print(K.is_sparse(b))
+True
+&gt;&gt;&gt; c = K.to_dense(b)
+&gt;&gt;&gt; print(K.is_sparse(c))
+False
+</code></pre>
+
+<hr />
+<h3 id="variable">variable</h3>
+<pre><code class="python">keras.backend.variable(value, dtype=None, name=None, constraint=None)
+</code></pre>
+
+<p>Instantiates a variable and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>value</strong>: Numpy array, initial value of the tensor.</li>
+<li><strong>dtype</strong>: Tensor type.</li>
+<li><strong>name</strong>: Optional name string for the tensor.</li>
+<li><strong>constraint</strong>: Optional projection function to be
+    applied to the variable after an optimizer update.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A variable instance (with Keras metadata included).</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; val = np.array([[1, 2], [3, 4]])
+&gt;&gt;&gt; kvar = K.variable(value=val, dtype='float64', name='example_var')
+&gt;&gt;&gt; K.dtype(kvar)
+'float64'
+&gt;&gt;&gt; print(kvar)
+example_var
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 1.,  2.],
+       [ 3.,  4.]])
+</code></pre>
+
+<hr />
+<h3 id="constant">constant</h3>
+<pre><code class="python">keras.backend.constant(value, dtype=None, shape=None, name=None)
+</code></pre>
+
+<p>Creates a constant tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>value</strong>: A constant value (or list)</li>
+<li><strong>dtype</strong>: The type of the elements of the resulting tensor.</li>
+<li><strong>shape</strong>: Optional dimensions of resulting tensor.</li>
+<li><strong>name</strong>: Optional name for the tensor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Constant Tensor.</p>
+<hr />
+<h3 id="is_keras_tensor">is_keras_tensor</h3>
+<pre><code class="python">keras.backend.is_keras_tensor(x)
+</code></pre>
+
+<p>Returns whether <code>x</code> is a Keras tensor.</p>
+<p>A "Keras tensor" is a tensor that was returned by a Keras layer,
+(<code>Layer</code> class) or by <code>Input</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A candidate tensor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A boolean: Whether the argument is a Keras tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: In case <code>x</code> is not a symbolic tensor.</li>
+</ul>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; from keras.layers import Input, Dense
+&gt;&gt;&gt; np_var = numpy.array([1, 2])
+&gt;&gt;&gt; K.is_keras_tensor(np_var) # A numpy array is not a symbolic tensor.
+ValueError
+&gt;&gt;&gt; k_var = tf.placeholder('float32', shape=(1,1))
+&gt;&gt;&gt; K.is_keras_tensor(k_var) # A variable indirectly created outside of keras is not a Keras tensor.
+False
+&gt;&gt;&gt; keras_var = K.variable(np_var)
+&gt;&gt;&gt; K.is_keras_tensor(keras_var)  # A variable created with the keras backend is not a Keras tensor.
+False
+&gt;&gt;&gt; keras_placeholder = K.placeholder(shape=(2, 4, 5))
+&gt;&gt;&gt; K.is_keras_tensor(keras_placeholder)  # A placeholder is not a Keras tensor.
+False
+&gt;&gt;&gt; keras_input = Input([10])
+&gt;&gt;&gt; K.is_keras_tensor(keras_input) # An Input is a Keras tensor.
+True
+&gt;&gt;&gt; keras_layer_output = Dense(10)(keras_input)
+&gt;&gt;&gt; K.is_keras_tensor(keras_layer_output) # Any Keras layer output is a Keras tensor.
+True
+</code></pre>
+
+<hr />
+<h3 id="is_tensor">is_tensor</h3>
+<pre><code class="python">keras.backend.is_tensor(x)
+</code></pre>
+
+<hr />
+<h3 id="placeholder">placeholder</h3>
+<pre><code class="python">keras.backend.placeholder(shape=None, ndim=None, dtype=None, sparse=False, name=None)
+</code></pre>
+
+<p>Instantiates a placeholder tensor and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: Shape of the placeholder
+    (integer tuple, may include <code>None</code> entries).</li>
+<li><strong>ndim</strong>: Number of axes of the tensor.
+    At least one of {<code>shape</code>, <code>ndim</code>} must be specified.
+    If both are specified, <code>shape</code> is used.</li>
+<li><strong>dtype</strong>: Placeholder type.</li>
+<li><strong>sparse</strong>: Boolean, whether the placeholder should have a sparse type.</li>
+<li><strong>name</strong>: Optional name string for the placeholder.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Tensor instance (with Keras metadata included).</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; input_ph = K.placeholder(shape=(2, 4, 5))
+&gt;&gt;&gt; input_ph._keras_shape
+(2, 4, 5)
+&gt;&gt;&gt; input_ph
+&lt;tf.Tensor 'Placeholder_4:0' shape=(2, 4, 5) dtype=float32&gt;
+</code></pre>
+
+<hr />
+<h3 id="is_placeholder">is_placeholder</h3>
+<pre><code class="python">keras.backend.is_placeholder(x)
+</code></pre>
+
+<p>Returns whether <code>x</code> is a placeholder.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A candidate placeholder.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Boolean.</p>
+<hr />
+<h3 id="shape">shape</h3>
+<pre><code class="python">keras.backend.shape(x)
+</code></pre>
+
+<p>Returns the symbolic shape of a tensor or variable.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A symbolic shape (which is itself a tensor).</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python"># TensorFlow example
+&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; tf_session = K.get_session()
+&gt;&gt;&gt; val = np.array([[1, 2], [3, 4]])
+&gt;&gt;&gt; kvar = K.variable(value=val)
+&gt;&gt;&gt; inputs = keras.backend.placeholder(shape=(2, 4, 5))
+&gt;&gt;&gt; K.shape(kvar)
+&lt;tf.Tensor 'Shape_8:0' shape=(2,) dtype=int32&gt;
+&gt;&gt;&gt; K.shape(inputs)
+&lt;tf.Tensor 'Shape_9:0' shape=(3,) dtype=int32&gt;
+# To get integer shape (Instead, you can use K.int_shape(x))
+&gt;&gt;&gt; K.shape(kvar).eval(session=tf_session)
+array([2, 2], dtype=int32)
+&gt;&gt;&gt; K.shape(inputs).eval(session=tf_session)
+array([2, 4, 5], dtype=int32)
+</code></pre>
+
+<hr />
+<h3 id="int_shape">int_shape</h3>
+<pre><code class="python">keras.backend.int_shape(x)
+</code></pre>
+
+<p>Returns the shape of tensor or variable as a tuple of int or None entries.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tuple of integers (or None entries).</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; inputs = K.placeholder(shape=(2, 4, 5))
+&gt;&gt;&gt; K.int_shape(inputs)
+(2, 4, 5)
+&gt;&gt;&gt; val = np.array([[1, 2], [3, 4]])
+&gt;&gt;&gt; kvar = K.variable(value=val)
+&gt;&gt;&gt; K.int_shape(kvar)
+(2, 2)
+</code></pre>
+
+<hr />
+<h3 id="ndim">ndim</h3>
+<pre><code class="python">keras.backend.ndim(x)
+</code></pre>
+
+<p>Returns the number of axes in a tensor, as an integer.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Integer (scalar), number of axes.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; inputs = K.placeholder(shape=(2, 4, 5))
+&gt;&gt;&gt; val = np.array([[1, 2], [3, 4]])
+&gt;&gt;&gt; kvar = K.variable(value=val)
+&gt;&gt;&gt; K.ndim(inputs)
+3
+&gt;&gt;&gt; K.ndim(kvar)
+2
+</code></pre>
+
+<hr />
+<h3 id="dtype">dtype</h3>
+<pre><code class="python">keras.backend.dtype(x)
+</code></pre>
+
+<p>Returns the dtype of a Keras tensor or variable, as a string.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>String, dtype of <code>x</code>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; K.dtype(K.placeholder(shape=(2,4,5)))
+'float32'
+&gt;&gt;&gt; K.dtype(K.placeholder(shape=(2,4,5), dtype='float32'))
+'float32'
+&gt;&gt;&gt; K.dtype(K.placeholder(shape=(2,4,5), dtype='float64'))
+'float64'
+# Keras variable
+&gt;&gt;&gt; kvar = K.variable(np.array([[1, 2], [3, 4]]))
+&gt;&gt;&gt; K.dtype(kvar)
+'float32_ref'
+&gt;&gt;&gt; kvar = K.variable(np.array([[1, 2], [3, 4]]), dtype='float32')
+&gt;&gt;&gt; K.dtype(kvar)
+'float32_ref'
+</code></pre>
+
+<hr />
+<h3 id="eval">eval</h3>
+<pre><code class="python">keras.backend.eval(x)
+</code></pre>
+
+<p>Evaluates the value of a variable.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Numpy array.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; kvar = K.variable(np.array([[1, 2], [3, 4]]), dtype='float32')
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 1.,  2.],
+       [ 3.,  4.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="zeros">zeros</h3>
+<pre><code class="python">keras.backend.zeros(shape, dtype=None, name=None)
+</code></pre>
+
+<p>Instantiates an all-zeros variable and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: Tuple of integers, shape of returned Keras variable</li>
+<li><strong>dtype</strong>: String, data type of returned Keras variable</li>
+<li><strong>name</strong>: String, name of returned Keras variable</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A variable (including Keras metadata), filled with <code>0.0</code>.
+Note that if <code>shape</code> was symbolic, we cannot return a variable,
+and will return a dynamically-shaped tensor instead.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; kvar = K.zeros((3,4))
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.],
+       [ 0.,  0.,  0.,  0.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="ones">ones</h3>
+<pre><code class="python">keras.backend.ones(shape, dtype=None, name=None)
+</code></pre>
+
+<p>Instantiates an all-ones variable and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: Tuple of integers, shape of returned Keras variable.</li>
+<li><strong>dtype</strong>: String, data type of returned Keras variable.</li>
+<li><strong>name</strong>: String, name of returned Keras variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Keras variable, filled with <code>1.0</code>.
+Note that if <code>shape</code> was symbolic, we cannot return a variable,
+and will return a dynamically-shaped tensor instead.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; kvar = K.ones((3,4))
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="eye">eye</h3>
+<pre><code class="python">keras.backend.eye(size, dtype=None, name=None)
+</code></pre>
+
+<p>Instantiate an identity matrix and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>size</strong>: Integer, number of rows/columns.</li>
+<li><strong>dtype</strong>: String, data type of returned Keras variable.</li>
+<li><strong>name</strong>: String, name of returned Keras variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Keras variable, an identity matrix.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; kvar = K.eye(3)
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 1.,  0.,  0.],
+       [ 0.,  1.,  0.],
+       [ 0.,  0.,  1.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="zeros_like">zeros_like</h3>
+<pre><code class="python">keras.backend.zeros_like(x, dtype=None, name=None)
+</code></pre>
+
+<p>Instantiates an all-zeros variable of the same shape as another tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Keras variable or Keras tensor.</li>
+<li><strong>dtype</strong>: String, dtype of returned Keras variable.
+     None uses the dtype of x.</li>
+<li><strong>name</strong>: String, name for the variable to create.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Keras variable with the shape of x filled with zeros.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; kvar = K.variable(np.random.random((2,3)))
+&gt;&gt;&gt; kvar_zeros = K.zeros_like(kvar)
+&gt;&gt;&gt; K.eval(kvar_zeros)
+array([[ 0.,  0.,  0.],
+       [ 0.,  0.,  0.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="ones_like">ones_like</h3>
+<pre><code class="python">keras.backend.ones_like(x, dtype=None, name=None)
+</code></pre>
+
+<p>Instantiates an all-ones variable of the same shape as another tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Keras variable or tensor.</li>
+<li><strong>dtype</strong>: String, dtype of returned Keras variable.
+     None uses the dtype of x.</li>
+<li><strong>name</strong>: String, name for the variable to create.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Keras variable with the shape of x filled with ones.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; kvar = K.variable(np.random.random((2,3)))
+&gt;&gt;&gt; kvar_ones = K.ones_like(kvar)
+&gt;&gt;&gt; K.eval(kvar_ones)
+array([[ 1.,  1.,  1.],
+       [ 1.,  1.,  1.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="identity">identity</h3>
+<pre><code class="python">keras.backend.identity(x, name=None)
+</code></pre>
+
+<p>Returns a tensor with the same content as the input tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: The input tensor.</li>
+<li><strong>name</strong>: String, name for the variable to create.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor of the same shape, type and content.</p>
+<hr />
+<h3 id="random_uniform_variable">random_uniform_variable</h3>
+<pre><code class="python">keras.backend.random_uniform_variable(shape, low, high, dtype=None, name=None, seed=None)
+</code></pre>
+
+<p>Instantiates a variable with values drawn from a uniform distribution.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: Tuple of integers, shape of returned Keras variable.</li>
+<li><strong>low</strong>: Float, lower boundary of the output interval.</li>
+<li><strong>high</strong>: Float, upper boundary of the output interval.</li>
+<li><strong>dtype</strong>: String, dtype of returned Keras variable.</li>
+<li><strong>name</strong>: String, name of returned Keras variable.</li>
+<li><strong>seed</strong>: Integer, random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Keras variable, filled with drawn samples.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python"># TensorFlow example
+&gt;&gt;&gt; kvar = K.random_uniform_variable((2,3), 0, 1)
+&gt;&gt;&gt; kvar
+&lt;tensorflow.python.ops.variables.Variable object at 0x10ab40b10&gt;
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 0.10940075,  0.10047495,  0.476143  ],
+       [ 0.66137183,  0.00869417,  0.89220798]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="random_normal_variable">random_normal_variable</h3>
+<pre><code class="python">keras.backend.random_normal_variable(shape, mean, scale, dtype=None, name=None, seed=None)
+</code></pre>
+
+<p>Instantiates a variable with values drawn from a normal distribution.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: Tuple of integers, shape of returned Keras variable.</li>
+<li><strong>mean</strong>: Float, mean of the normal distribution.</li>
+<li><strong>scale</strong>: Float, standard deviation of the normal distribution.</li>
+<li><strong>dtype</strong>: String, dtype of returned Keras variable.</li>
+<li><strong>name</strong>: String, name of returned Keras variable.</li>
+<li><strong>seed</strong>: Integer, random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Keras variable, filled with drawn samples.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python"># TensorFlow example
+&gt;&gt;&gt; kvar = K.random_normal_variable((2,3), 0, 1)
+&gt;&gt;&gt; kvar
+&lt;tensorflow.python.ops.variables.Variable object at 0x10ab12dd0&gt;
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 1.19591331,  0.68685907, -0.63814116],
+       [ 0.92629528,  0.28055015,  1.70484698]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="count_params">count_params</h3>
+<pre><code class="python">keras.backend.count_params(x)
+</code></pre>
+
+<p>Returns the static number of elements in a Keras variable or tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Keras variable or tensor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Integer, the number of elements in <code>x</code>, i.e., the product of the
+array's static dimensions.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; kvar = K.zeros((2,3))
+&gt;&gt;&gt; K.count_params(kvar)
+6
+&gt;&gt;&gt; K.eval(kvar)
+array([[ 0.,  0.,  0.],
+       [ 0.,  0.,  0.]], dtype=float32)
+</code></pre>
+
+<hr />
+<h3 id="cast">cast</h3>
+<pre><code class="python">keras.backend.cast(x, dtype)
+</code></pre>
+
+<p>Casts a tensor to a different dtype and returns it.</p>
+<p>You can cast a Keras variable but it still returns a Keras tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Keras tensor (or variable).</li>
+<li><strong>dtype</strong>: String, either (<code>'float16'</code>, <code>'float32'</code>, or <code>'float64'</code>).</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Keras tensor with dtype <code>dtype</code>.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; from keras import backend as K
+&gt;&gt;&gt; input = K.placeholder((2, 3), dtype='float32')
+&gt;&gt;&gt; input
+&lt;tf.Tensor 'Placeholder_2:0' shape=(2, 3) dtype=float32&gt;
+# It doesn't work in-place as below.
+&gt;&gt;&gt; K.cast(input, dtype='float16')
+&lt;tf.Tensor 'Cast_1:0' shape=(2, 3) dtype=float16&gt;
+&gt;&gt;&gt; input
+&lt;tf.Tensor 'Placeholder_2:0' shape=(2, 3) dtype=float32&gt;
+# you need to assign it.
+&gt;&gt;&gt; input = K.cast(input, dtype='float16')
+&gt;&gt;&gt; input
+&lt;tf.Tensor 'Cast_2:0' shape=(2, 3) dtype=float16&gt;
+</code></pre>
+
+<hr />
+<h3 id="update">update</h3>
+<pre><code class="python">keras.backend.update(x, new_x)
+</code></pre>
+
+<p>Update the value of <code>x</code> to <code>new_x</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A <code>Variable</code>.</li>
+<li><strong>new_x</strong>: A tensor of same shape as <code>x</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The variable <code>x</code> updated.</p>
+<hr />
+<h3 id="update_add">update_add</h3>
+<pre><code class="python">keras.backend.update_add(x, increment)
+</code></pre>
+
+<p>Update the value of <code>x</code> by adding <code>increment</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A <code>Variable</code>.</li>
+<li><strong>increment</strong>: A tensor of same shape as <code>x</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The variable <code>x</code> updated.</p>
+<hr />
+<h3 id="update_sub">update_sub</h3>
+<pre><code class="python">keras.backend.update_sub(x, decrement)
+</code></pre>
+
+<p>Update the value of <code>x</code> by subtracting <code>decrement</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A <code>Variable</code>.</li>
+<li><strong>decrement</strong>: A tensor of same shape as <code>x</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The variable <code>x</code> updated.</p>
+<hr />
+<h3 id="moving_average_update">moving_average_update</h3>
+<pre><code class="python">keras.backend.moving_average_update(x, value, momentum)
+</code></pre>
+
+<p>Compute the moving average of a variable.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A <code>Variable</code>.</li>
+<li><strong>value</strong>: A tensor with the same shape as <code>x</code>.</li>
+<li><strong>momentum</strong>: The moving average momentum.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>An operation to update the variable.</p>
+<hr />
+<h3 id="dot">dot</h3>
+<pre><code class="python">keras.backend.dot(x, y)
+</code></pre>
+
+<p>Multiplies 2 tensors (and/or variables) and returns a <em>tensor</em>.</p>
+<p>When attempting to multiply a nD tensor
+with a nD tensor, it reproduces the Theano behavior.
+(e.g. <code>(2, 3) * (4, 3, 5) -&gt; (2, 4, 5)</code>)</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, dot product of <code>x</code> and <code>y</code>.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python"># dot product between tensors
+&gt;&gt;&gt; x = K.placeholder(shape=(2, 3))
+&gt;&gt;&gt; y = K.placeholder(shape=(3, 4))
+&gt;&gt;&gt; xy = K.dot(x, y)
+&gt;&gt;&gt; xy
+&lt;tf.Tensor 'MatMul_9:0' shape=(2, 4) dtype=float32&gt;
+</code></pre>
+
+<pre><code class="python"># dot product between tensors
+&gt;&gt;&gt; x = K.placeholder(shape=(32, 28, 3))
+&gt;&gt;&gt; y = K.placeholder(shape=(3, 4))
+&gt;&gt;&gt; xy = K.dot(x, y)
+&gt;&gt;&gt; xy
+&lt;tf.Tensor 'MatMul_9:0' shape=(32, 28, 4) dtype=float32&gt;
+</code></pre>
+
+<pre><code class="python"># Theano-like behavior example
+&gt;&gt;&gt; x = K.random_uniform_variable(shape=(2, 3), low=0, high=1)
+&gt;&gt;&gt; y = K.ones((4, 3, 5))
+&gt;&gt;&gt; xy = K.dot(x, y)
+&gt;&gt;&gt; K.int_shape(xy)
+(2, 4, 5)
+</code></pre>
+
+<hr />
+<h3 id="batch_dot">batch_dot</h3>
+<pre><code class="python">keras.backend.batch_dot(x, y, axes=None)
+</code></pre>
+
+<p>Batchwise dot product.</p>
+<p><code>batch_dot</code> is used to compute dot product of <code>x</code> and <code>y</code> when
+<code>x</code> and <code>y</code> are data in batch, i.e. in a shape of
+<code>(batch_size, :)</code>.
+<code>batch_dot</code> results in a tensor or variable with less dimensions
+than the input. If the number of dimensions is reduced to 1,
+we use <code>expand_dims</code> to make sure that ndim is at least 2.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Keras tensor or variable with <code>ndim &gt;= 2</code>.</li>
+<li><strong>y</strong>: Keras tensor or variable with <code>ndim &gt;= 2</code>.</li>
+<li><strong>axes</strong>: list of (or single) int with target dimensions.
+    The lengths of <code>axes[0]</code> and <code>axes[1]</code> should be the same.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with shape equal to the concatenation of <code>x</code>'s shape
+(less the dimension that was summed over) and <code>y</code>'s shape
+(less the batch dimension and the dimension that was summed over).
+If the final rank is 1, we reshape it to <code>(batch_size, 1)</code>.</p>
+<p><strong>Examples</strong></p>
+<p>Assume <code>x = [[1, 2], [3, 4]]</code> and <code>y = [[5, 6], [7, 8]]</code>
+<code>batch_dot(x, y, axes=1) = [[17], [53]]</code> which is the main diagonal
+of <code>x.dot(y.T)</code>, although we never have to calculate the off-diagonal
+elements.</p>
+<p>Shape inference:
+Let <code>x</code>'s shape be <code>(100, 20)</code> and <code>y</code>'s shape be <code>(100, 30, 20)</code>.
+If <code>axes</code> is (1, 2), to find the output shape of resultant tensor,
+loop through each dimension in <code>x</code>'s shape and <code>y</code>'s shape:</p>
+<ul>
+<li><code>x.shape[0]</code> : 100 : append to output shape</li>
+<li><code>x.shape[1]</code> : 20 : do not append to output shape,
+dimension 1 of <code>x</code> has been summed over. (<code>dot_axes[0]</code> = 1)</li>
+<li><code>y.shape[0]</code> : 100 : do not append to output shape,
+always ignore first dimension of <code>y</code></li>
+<li><code>y.shape[1]</code> : 30 : append to output shape</li>
+<li><code>y.shape[2]</code> : 20 : do not append to output shape,
+dimension 2 of <code>y</code> has been summed over. (<code>dot_axes[1]</code> = 2)
+<code>output_shape</code> = <code>(100, 30)</code></li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; x_batch = K.ones(shape=(32, 20, 1))
+&gt;&gt;&gt; y_batch = K.ones(shape=(32, 30, 20))
+&gt;&gt;&gt; xy_batch_dot = K.batch_dot(x_batch, y_batch, axes=[1, 2])
+&gt;&gt;&gt; K.int_shape(xy_batch_dot)
+(32, 1, 30)
+</code></pre>
+
+<hr />
+<h3 id="transpose">transpose</h3>
+<pre><code class="python">keras.backend.transpose(x)
+</code></pre>
+
+<p>Transposes a tensor and returns it.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<p><strong>Examples</strong></p>
+<pre><code class="python">&gt;&gt;&gt; var = K.variable([[1, 2, 3], [4, 5, 6]])
+&gt;&gt;&gt; K.eval(var)
+array([[ 1.,  2.,  3.],
+       [ 4.,  5.,  6.]], dtype=float32)
+&gt;&gt;&gt; var_transposed = K.transpose(var)
+&gt;&gt;&gt; K.eval(var_transposed)
+array([[ 1.,  4.],
+       [ 2.,  5.],
+       [ 3.,  6.]], dtype=float32)
+</code></pre>
+
+<pre><code class="python">&gt;&gt;&gt; inputs = K.placeholder((2, 3))
+&gt;&gt;&gt; inputs
+&lt;tf.Tensor 'Placeholder_11:0' shape=(2, 3) dtype=float32&gt;
+&gt;&gt;&gt; input_transposed = K.transpose(inputs)
+&gt;&gt;&gt; input_transposed
+&lt;tf.Tensor 'transpose_4:0' shape=(3, 2) dtype=float32&gt;
+
+</code></pre>
+
+<hr />
+<h3 id="gather">gather</h3>
+<pre><code class="python">keras.backend.gather(reference, indices)
+</code></pre>
+
+<p>Retrieves the elements of indices <code>indices</code> in the tensor <code>reference</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>reference</strong>: A tensor.</li>
+<li><strong>indices</strong>: An integer tensor of indices.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor of same type as <code>reference</code>.</p>
+<hr />
+<h3 id="max">max</h3>
+<pre><code class="python">keras.backend.max(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Maximum value in a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to find maximum values.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimension is retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with maximum values of <code>x</code>.</p>
+<hr />
+<h3 id="min">min</h3>
+<pre><code class="python">keras.backend.min(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Minimum value in a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to find minimum values.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimension is retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with miminum values of <code>x</code>.</p>
+<hr />
+<h3 id="sum">sum</h3>
+<pre><code class="python">keras.backend.sum(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Sum of the values in a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to sum over.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimension is retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with sum of <code>x</code>.</p>
+<hr />
+<h3 id="prod">prod</h3>
+<pre><code class="python">keras.backend.prod(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Multiplies the values in a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to compute the product.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimension is retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with the product of elements of <code>x</code>.</p>
+<hr />
+<h3 id="cumsum">cumsum</h3>
+<pre><code class="python">keras.backend.cumsum(x, axis=0)
+</code></pre>
+
+<p>Cumulative sum of the values in a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to compute the sum.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor of the cumulative sum of values of <code>x</code> along <code>axis</code>.</p>
+<hr />
+<h3 id="cumprod">cumprod</h3>
+<pre><code class="python">keras.backend.cumprod(x, axis=0)
+</code></pre>
+
+<p>Cumulative product of the values in a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to compute the product.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor of the cumulative product of values of <code>x</code> along <code>axis</code>.</p>
+<hr />
+<h3 id="var">var</h3>
+<pre><code class="python">keras.backend.var(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Variance of a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to compute the variance.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimension is retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with the variance of elements of <code>x</code>.</p>
+<hr />
+<h3 id="std">std</h3>
+<pre><code class="python">keras.backend.std(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Standard deviation of a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to compute the standard deviation.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimension is retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with the standard deviation of elements of <code>x</code>.</p>
+<hr />
+<h3 id="mean">mean</h3>
+<pre><code class="python">keras.backend.mean(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Mean of a tensor, alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: A list of integer. Axes to compute the mean.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1 for each entry in <code>axis</code>. If <code>keepdims</code> is <code>True</code>,
+    the reduced dimensions are retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with the mean of elements of <code>x</code>.</p>
+<hr />
+<h3 id="any">any</h3>
+<pre><code class="python">keras.backend.any(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Bitwise reduction (logical OR).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>axis</strong>: axis along which to perform the reduction.</li>
+<li><strong>keepdims</strong>: whether the drop or broadcast the reduction axes.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A uint8 tensor (0s and 1s).</p>
+<hr />
+<h3 id="all">all</h3>
+<pre><code class="python">keras.backend.all(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Bitwise reduction (logical AND).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>axis</strong>: axis along which to perform the reduction.</li>
+<li><strong>keepdims</strong>: whether the drop or broadcast the reduction axes.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A uint8 tensor (0s and 1s).</p>
+<hr />
+<h3 id="argmax">argmax</h3>
+<pre><code class="python">keras.backend.argmax(x, axis=-1)
+</code></pre>
+
+<p>Returns the index of the maximum value along an axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>axis</strong>: axis along which to perform the reduction.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="argmin">argmin</h3>
+<pre><code class="python">keras.backend.argmin(x, axis=-1)
+</code></pre>
+
+<p>Returns the index of the minimum value along an axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>axis</strong>: axis along which to perform the reduction.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="square">square</h3>
+<pre><code class="python">keras.backend.square(x)
+</code></pre>
+
+<p>Element-wise square.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="abs">abs</h3>
+<pre><code class="python">keras.backend.abs(x)
+</code></pre>
+
+<p>Element-wise absolute value.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="sqrt">sqrt</h3>
+<pre><code class="python">keras.backend.sqrt(x)
+</code></pre>
+
+<p>Element-wise square root.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="exp">exp</h3>
+<pre><code class="python">keras.backend.exp(x)
+</code></pre>
+
+<p>Element-wise exponential.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="log">log</h3>
+<pre><code class="python">keras.backend.log(x)
+</code></pre>
+
+<p>Element-wise log.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="logsumexp">logsumexp</h3>
+<pre><code class="python">keras.backend.logsumexp(x, axis=None, keepdims=False)
+</code></pre>
+
+<p>Computes log(sum(exp(elements across dimensions of a tensor))).</p>
+<p>This function is more numerically stable than log(sum(exp(x))).
+It avoids overflows caused by taking the exp of large inputs and
+underflows caused by taking the log of small inputs.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: An integer, the axis to reduce over.</li>
+<li><strong>keepdims</strong>: A boolean, whether to keep the dimensions or not.
+    If <code>keepdims</code> is <code>False</code>, the rank of the tensor is reduced
+    by 1. If <code>keepdims</code> is <code>True</code>, the reduced dimension is
+    retained with length 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The reduced tensor.</p>
+<hr />
+<h3 id="round">round</h3>
+<pre><code class="python">keras.backend.round(x)
+</code></pre>
+
+<p>Element-wise rounding to the closest integer.</p>
+<p>In case of tie, the rounding mode used is "half to even".</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="sign">sign</h3>
+<pre><code class="python">keras.backend.sign(x)
+</code></pre>
+
+<p>Element-wise sign.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="pow">pow</h3>
+<pre><code class="python">keras.backend.pow(x, a)
+</code></pre>
+
+<p>Element-wise exponentiation.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>a</strong>: Python integer.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="clip">clip</h3>
+<pre><code class="python">keras.backend.clip(x, min_value, max_value)
+</code></pre>
+
+<p>Element-wise value clipping.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>min_value</strong>: Python float or integer.</li>
+<li><strong>max_value</strong>: Python float or integer.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="equal">equal</h3>
+<pre><code class="python">keras.backend.equal(x, y)
+</code></pre>
+
+<p>Element-wise equality between two tensors.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A bool tensor.</p>
+<hr />
+<h3 id="not_equal">not_equal</h3>
+<pre><code class="python">keras.backend.not_equal(x, y)
+</code></pre>
+
+<p>Element-wise inequality between two tensors.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A bool tensor.</p>
+<hr />
+<h3 id="greater">greater</h3>
+<pre><code class="python">keras.backend.greater(x, y)
+</code></pre>
+
+<p>Element-wise truth value of (x &gt; y).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A bool tensor.</p>
+<hr />
+<h3 id="greater_equal">greater_equal</h3>
+<pre><code class="python">keras.backend.greater_equal(x, y)
+</code></pre>
+
+<p>Element-wise truth value of (x &gt;= y).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A bool tensor.</p>
+<hr />
+<h3 id="less">less</h3>
+<pre><code class="python">keras.backend.less(x, y)
+</code></pre>
+
+<p>Element-wise truth value of (x &lt; y).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A bool tensor.</p>
+<hr />
+<h3 id="less_equal">less_equal</h3>
+<pre><code class="python">keras.backend.less_equal(x, y)
+</code></pre>
+
+<p>Element-wise truth value of (x &lt;= y).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A bool tensor.</p>
+<hr />
+<h3 id="maximum">maximum</h3>
+<pre><code class="python">keras.backend.maximum(x, y)
+</code></pre>
+
+<p>Element-wise maximum of two tensors.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="minimum">minimum</h3>
+<pre><code class="python">keras.backend.minimum(x, y)
+</code></pre>
+
+<p>Element-wise minimum of two tensors.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>y</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="sin">sin</h3>
+<pre><code class="python">keras.backend.sin(x)
+</code></pre>
+
+<p>Computes sin of x element-wise.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="cos">cos</h3>
+<pre><code class="python">keras.backend.cos(x)
+</code></pre>
+
+<p>Computes cos of x element-wise.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="normalize_batch_in_training">normalize_batch_in_training</h3>
+<pre><code class="python">keras.backend.normalize_batch_in_training(x, gamma, beta, reduction_axes, epsilon=0.001)
+</code></pre>
+
+<p>Computes mean and std for batch then apply batch_normalization on batch.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Input tensor or variable.</li>
+<li><strong>gamma</strong>: Tensor by which to scale the input.</li>
+<li><strong>beta</strong>: Tensor with which to center the input.</li>
+<li><strong>reduction_axes</strong>: iterable of integers,
+    axes over which to normalize.</li>
+<li><strong>epsilon</strong>: Fuzz factor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tuple length of 3, <code>(normalized_tensor, mean, variance)</code>.</p>
+<hr />
+<h3 id="batch_normalization">batch_normalization</h3>
+<pre><code class="python">keras.backend.batch_normalization(x, mean, var, beta, gamma, axis=-1, epsilon=0.001)
+</code></pre>
+
+<p>Applies batch normalization on x given mean, var, beta and gamma.</p>
+<p>I.e. returns:
+<code>output = (x - mean) / (sqrt(var) + epsilon) * gamma + beta</code></p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Input tensor or variable.</li>
+<li><strong>mean</strong>: Mean of batch.</li>
+<li><strong>var</strong>: Variance of batch.</li>
+<li><strong>beta</strong>: Tensor with which to center the input.</li>
+<li><strong>gamma</strong>: Tensor by which to scale the input.</li>
+<li><strong>axis</strong>: Integer, the axis that should be normalized.
+    (typically the features axis).</li>
+<li><strong>epsilon</strong>: Fuzz factor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="concatenate">concatenate</h3>
+<pre><code class="python">keras.backend.concatenate(tensors, axis=-1)
+</code></pre>
+
+<p>Concatenates a list of tensors alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>tensors</strong>: list of tensors to concatenate.</li>
+<li><strong>axis</strong>: concatenation axis.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="reshape">reshape</h3>
+<pre><code class="python">keras.backend.reshape(x, shape)
+</code></pre>
+
+<p>Reshapes a tensor to the specified shape.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>shape</strong>: Target shape tuple.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="permute_dimensions">permute_dimensions</h3>
+<pre><code class="python">keras.backend.permute_dimensions(x, pattern)
+</code></pre>
+
+<p>Permutes axes in a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>pattern</strong>: A tuple of
+    dimension indices, e.g. <code>(0, 2, 1)</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="resize_images">resize_images</h3>
+<pre><code class="python">keras.backend.resize_images(x, height_factor, width_factor, data_format)
+</code></pre>
+
+<p>Resizes the images contained in a 4D tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable to resize.</li>
+<li><strong>height_factor</strong>: Positive integer.</li>
+<li><strong>width_factor</strong>: Positive integer.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="resize_volumes">resize_volumes</h3>
+<pre><code class="python">keras.backend.resize_volumes(x, depth_factor, height_factor, width_factor, data_format)
+</code></pre>
+
+<p>Resizes the volume contained in a 5D tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable to resize.</li>
+<li><strong>depth_factor</strong>: Positive integer.</li>
+<li><strong>height_factor</strong>: Positive integer.</li>
+<li><strong>width_factor</strong>: Positive integer.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="repeat_elements">repeat_elements</h3>
+<pre><code class="python">keras.backend.repeat_elements(x, rep, axis)
+</code></pre>
+
+<p>Repeats the elements of a tensor along an axis, like <code>np.repeat</code>.</p>
+<p>If <code>x</code> has shape <code>(s1, s2, s3)</code> and <code>axis</code> is <code>1</code>, the output
+will have shape <code>(s1, s2 * rep, s3)</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>rep</strong>: Python integer, number of times to repeat.</li>
+<li><strong>axis</strong>: Axis along which to repeat.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="repeat">repeat</h3>
+<pre><code class="python">keras.backend.repeat(x, n)
+</code></pre>
+
+<p>Repeats a 2D tensor.</p>
+<p>if <code>x</code> has shape (samples, dim) and <code>n</code> is <code>2</code>,
+the output will have shape <code>(samples, 2, dim)</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>n</strong>: Python integer, number of times to repeat.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="arange">arange</h3>
+<pre><code class="python">keras.backend.arange(start, stop=None, step=1, dtype='int32')
+</code></pre>
+
+<p>Creates a 1D tensor containing a sequence of integers.</p>
+<p>The function arguments use the same convention as
+Theano's arange: if only one argument is provided,
+it is in fact the "stop" argument and "start" is 0.</p>
+<p>The default type of the returned tensor is <code>'int32'</code> to
+match TensorFlow's default.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>start</strong>: Start value.</li>
+<li><strong>stop</strong>: Stop value.</li>
+<li><strong>step</strong>: Difference between two successive values.</li>
+<li><strong>dtype</strong>: Integer dtype to use.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>An integer tensor.</p>
+<hr />
+<h3 id="tile">tile</h3>
+<pre><code class="python">keras.backend.tile(x, n)
+</code></pre>
+
+<p>Creates a tensor by tiling <code>x</code> by <code>n</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable</li>
+<li><strong>n</strong>: A list of integer. The length must be the same as the number of
+    dimensions in <code>x</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tiled tensor.</p>
+<hr />
+<h3 id="flatten">flatten</h3>
+<pre><code class="python">keras.backend.flatten(x)
+</code></pre>
+
+<p>Flatten a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, reshaped into 1-D</p>
+<hr />
+<h3 id="batch_flatten">batch_flatten</h3>
+<pre><code class="python">keras.backend.batch_flatten(x)
+</code></pre>
+
+<p>Turn a nD tensor into a 2D tensor with same 0th dimension.</p>
+<p>In other words, it flattens each data samples of a batch.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="expand_dims">expand_dims</h3>
+<pre><code class="python">keras.backend.expand_dims(x, axis=-1)
+</code></pre>
+
+<p>Adds a 1-sized dimension at index "axis".</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: Position where to add a new axis.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with expanded dimensions.</p>
+<hr />
+<h3 id="squeeze">squeeze</h3>
+<pre><code class="python">keras.backend.squeeze(x, axis)
+</code></pre>
+
+<p>Removes a 1-dimension from the tensor at index "axis".</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: Axis to drop.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor with the same data as <code>x</code> but reduced dimensions.</p>
+<hr />
+<h3 id="temporal_padding">temporal_padding</h3>
+<pre><code class="python">keras.backend.temporal_padding(x, padding=(1, 1))
+</code></pre>
+
+<p>Pads the middle dimension of a 3D tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>padding</strong>: Tuple of 2 integers, how many zeros to
+    add at the start and end of dim 1.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A padded 3D tensor.</p>
+<hr />
+<h3 id="spatial_2d_padding">spatial_2d_padding</h3>
+<pre><code class="python">keras.backend.spatial_2d_padding(x, padding=((1, 1), (1, 1)), data_format=None)
+</code></pre>
+
+<p>Pads the 2nd and 3rd dimensions of a 4D tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>padding</strong>: Tuple of 2 tuples, padding pattern.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A padded 4D tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="spatial_3d_padding">spatial_3d_padding</h3>
+<pre><code class="python">keras.backend.spatial_3d_padding(x, padding=((1, 1), (1, 1), (1, 1)), data_format=None)
+</code></pre>
+
+<p>Pads 5D tensor with zeros along the depth, height, width dimensions.</p>
+<p>Pads these dimensions with respectively
+"padding[0]", "padding[1]" and "padding[2]" zeros left and right.</p>
+<p>For 'channels_last' data_format,
+the 2nd, 3rd and 4th dimension will be padded.
+For 'channels_first' data_format,
+the 3rd, 4th and 5th dimension will be padded.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>padding</strong>: Tuple of 3 tuples, padding pattern.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A padded 5D tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="stack">stack</h3>
+<pre><code class="python">keras.backend.stack(x, axis=0)
+</code></pre>
+
+<p>Stacks a list of rank <code>R</code> tensors into a rank <code>R+1</code> tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: List of tensors.</li>
+<li><strong>axis</strong>: Axis along which to perform stacking.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="one_hot">one_hot</h3>
+<pre><code class="python">keras.backend.one_hot(indices, num_classes)
+</code></pre>
+
+<p>Computes the one-hot representation of an integer tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>indices</strong>: nD integer tensor of shape
+    <code>(batch_size, dim1, dim2, ... dim(n-1))</code></li>
+<li><strong>num_classes</strong>: Integer, number of classes to consider.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>(n + 1)D one hot representation of the input
+with shape <code>(batch_size, dim1, dim2, ... dim(n-1), num_classes)</code></p>
+<hr />
+<h3 id="reverse">reverse</h3>
+<pre><code class="python">keras.backend.reverse(x, axes)
+</code></pre>
+
+<p>Reverses a tensor along the specified axes.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor to reverse.</li>
+<li><strong>axes</strong>: Integer or iterable of integers.
+    Axes to reverse.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="slice">slice</h3>
+<pre><code class="python">keras.backend.slice(x, start, size)
+</code></pre>
+
+<p>Extracts a slice from a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Input tensor.</li>
+<li><strong>start</strong>: Integer list/tuple or tensor
+    indicating the start indices of the slice
+    along each axis.</li>
+<li><strong>size</strong>: Integer list/tuple or tensor
+    indicating how many dimensions to slice
+    along each axis.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Tensor <code>x[start[0]: start[0] + size[0],
+          ...,
+          start[-1]: start[-1] + size[-1]]</code></p>
+<hr />
+<h3 id="get_value">get_value</h3>
+<pre><code class="python">keras.backend.get_value(x)
+</code></pre>
+
+<p>Returns the value of a variable.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: input variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A Numpy array.</p>
+<hr />
+<h3 id="batch_get_value">batch_get_value</h3>
+<pre><code class="python">keras.backend.batch_get_value(ops)
+</code></pre>
+
+<p>Returns the value of more than one tensor variable.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>ops</strong>: list of ops to run.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A list of Numpy arrays.</p>
+<hr />
+<h3 id="set_value">set_value</h3>
+<pre><code class="python">keras.backend.set_value(x, value)
+</code></pre>
+
+<p>Sets the value of a variable, from a Numpy array.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor to set to a new value.</li>
+<li><strong>value</strong>: Value to set the tensor to, as a Numpy array
+    (of the same shape).</li>
+</ul>
+<hr />
+<h3 id="batch_set_value">batch_set_value</h3>
+<pre><code class="python">keras.backend.batch_set_value(tuples)
+</code></pre>
+
+<p>Sets the values of many tensor variables at once.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>tuples</strong>: a list of tuples <code>(tensor, value)</code>.
+    <code>value</code> should be a Numpy array.</li>
+</ul>
+<hr />
+<h3 id="print_tensor">print_tensor</h3>
+<pre><code class="python">keras.backend.print_tensor(x, message='')
+</code></pre>
+
+<p>Prints <code>message</code> and the tensor value when evaluated.</p>
+<p>Note that <code>print_tensor</code> returns a new tensor identical to <code>x</code>
+which should be used in the following code. Otherwise the
+print operation is not taken into account during evaluation.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; x = K.print_tensor(x, message=&quot;x is: &quot;)
+</code></pre>
+
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor to print.</li>
+<li><strong>message</strong>: Message to print jointly with the tensor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The same tensor <code>x</code>, unchanged.</p>
+<hr />
+<h3 id="function">function</h3>
+<pre><code class="python">keras.backend.function(inputs, outputs, updates=None)
+</code></pre>
+
+<p>Instantiates a Keras function.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>inputs</strong>: List of placeholder tensors.</li>
+<li><strong>outputs</strong>: List of output tensors.</li>
+<li><strong>updates</strong>: List of update ops.</li>
+<li><strong>**kwargs</strong>: Passed to <code>tf.Session.run</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output values as Numpy arrays.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if invalid kwargs are passed in.</li>
+</ul>
+<hr />
+<h3 id="gradients">gradients</h3>
+<pre><code class="python">keras.backend.gradients(loss, variables)
+</code></pre>
+
+<p>Returns the gradients of <code>loss</code> w.r.t. <code>variables</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>loss</strong>: Scalar tensor to minimize.</li>
+<li><strong>variables</strong>: List of variables.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A gradients tensor.</p>
+<hr />
+<h3 id="stop_gradient">stop_gradient</h3>
+<pre><code class="python">keras.backend.stop_gradient(variables)
+</code></pre>
+
+<p>Returns <code>variables</code> but with zero gradient w.r.t. every other variable.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>variables</strong>: tensor or list of tensors to consider constant with respect
+    to any other variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A single tensor or a list of tensors (depending on the passed argument)
+    that has constant gradient with respect to any other variable.</p>
+<hr />
+<h3 id="rnn">rnn</h3>
+<pre><code class="python">keras.backend.rnn(step_function, inputs, initial_states, go_backwards=False, mask=None, constants=None, unroll=False, input_length=None)
+</code></pre>
+
+<p>Iterates over the time dimension of a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>step_function</strong>:
+    Parameters:
+        inputs: Tensor with shape (samples, ...) (no time dimension),
+            representing input for the batch of samples at a certain
+            time step.
+        states: List of tensors.
+    Returns:
+        outputs: Tensor with shape (samples, ...) (no time dimension),
+        new_states: Tist of tensors, same length and shapes
+            as 'states'.</li>
+<li><strong>inputs</strong>: Tensor of temporal data of shape (samples, time, ...)
+    (at least 3D).</li>
+<li><strong>initial_states</strong>: Tensor with shape (samples, ...) (no time dimension),
+    containing the initial values for the states used in
+    the step function.</li>
+<li><strong>go_backwards</strong>: Boolean. If True, do the iteration over the time
+    dimension in reverse order and return the reversed sequence.</li>
+<li><strong>mask</strong>: Binary tensor with shape (samples, time),
+    with a zero for every element that is masked.</li>
+<li><strong>constants</strong>: A list of constant values passed at each step.</li>
+<li><strong>unroll</strong>: Whether to unroll the RNN or to use a symbolic loop
+    (<code>while_loop</code> or <code>scan</code> depending on backend).</li>
+<li><strong>input_length</strong>: Static number of timesteps in the input.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tuple, <code>(last_output, outputs, new_states)</code>.</p>
+<p>last_output: The latest output of the rnn, of shape <code>(samples, ...)</code>
+outputs: Tensor with shape <code>(samples, time, ...)</code> where each
+entry <code>outputs[s, t]</code> is the output of the step function
+at time <code>t</code> for sample <code>s</code>.
+new_states: List of tensors, latest states returned by
+the step function, of shape <code>(samples, ...)</code>.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If input dimension is less than 3.</li>
+<li><strong>ValueError</strong>: If <code>unroll</code> is <code>True</code>
+    but input timestep is not a fixed number.</li>
+<li><strong>ValueError</strong>: If <code>mask</code> is provided (not <code>None</code>)
+    but states is not provided (<code>len(states)</code> == 0).</li>
+</ul>
+<hr />
+<h3 id="switch">switch</h3>
+<pre><code class="python">keras.backend.switch(condition, then_expression, else_expression)
+</code></pre>
+
+<p>Switches between two operations depending on a scalar value.</p>
+<p>Note that both <code>then_expression</code> and <code>else_expression</code>
+should be symbolic tensors of the <em>same shape</em>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>condition</strong>: tensor (<code>int</code> or <code>bool</code>).</li>
+<li><strong>then_expression</strong>: either a tensor, or a callable that returns a tensor.</li>
+<li><strong>else_expression</strong>: either a tensor, or a callable that returns a tensor.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>The selected tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If rank of <code>condition</code> is greater than rank of expressions.</li>
+</ul>
+<hr />
+<h3 id="in_train_phase">in_train_phase</h3>
+<pre><code class="python">keras.backend.in_train_phase(x, alt, training=None)
+</code></pre>
+
+<p>Selects <code>x</code> in train phase, and <code>alt</code> otherwise.</p>
+<p>Note that <code>alt</code> should have the <em>same shape</em> as <code>x</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: What to return in train phase
+    (tensor or callable that returns a tensor).</li>
+<li><strong>alt</strong>: What to return otherwise
+    (tensor or callable that returns a tensor).</li>
+<li><strong>training</strong>: Optional scalar tensor
+    (or Python boolean, or Python integer)
+    specifying the learning phase.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Either <code>x</code> or <code>alt</code> based on the <code>training</code> flag.
+the <code>training</code> flag defaults to <code>K.learning_phase()</code>.</p>
+<hr />
+<h3 id="in_test_phase">in_test_phase</h3>
+<pre><code class="python">keras.backend.in_test_phase(x, alt, training=None)
+</code></pre>
+
+<p>Selects <code>x</code> in test phase, and <code>alt</code> otherwise.</p>
+<p>Note that <code>alt</code> should have the <em>same shape</em> as <code>x</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: What to return in test phase
+    (tensor or callable that returns a tensor).</li>
+<li><strong>alt</strong>: What to return otherwise
+    (tensor or callable that returns a tensor).</li>
+<li><strong>training</strong>: Optional scalar tensor
+    (or Python boolean, or Python integer)
+    specifying the learning phase.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Either <code>x</code> or <code>alt</code> based on <code>K.learning_phase</code>.</p>
+<hr />
+<h3 id="relu">relu</h3>
+<pre><code class="python">keras.backend.relu(x, alpha=0.0, max_value=None)
+</code></pre>
+
+<p>Rectified linear unit.</p>
+<p>With default values, it returns element-wise <code>max(x, 0)</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>alpha</strong>: A scalar, slope of negative section (default=<code>0.</code>).</li>
+<li><strong>max_value</strong>: Saturation threshold.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="elu">elu</h3>
+<pre><code class="python">keras.backend.elu(x, alpha=1.0)
+</code></pre>
+
+<p>Exponential linear unit.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable to compute the activation function for.</li>
+<li><strong>alpha</strong>: A scalar, slope of negative section.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="softmax">softmax</h3>
+<pre><code class="python">keras.backend.softmax(x, axis=-1)
+</code></pre>
+
+<p>Softmax of a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+<li><strong>axis</strong>: The dimension softmax would be performed on.
+    The default is -1 which indicates the last dimension.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="softplus">softplus</h3>
+<pre><code class="python">keras.backend.softplus(x)
+</code></pre>
+
+<p>Softplus of a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="softsign">softsign</h3>
+<pre><code class="python">keras.backend.softsign(x)
+</code></pre>
+
+<p>Softsign of a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="categorical_crossentropy">categorical_crossentropy</h3>
+<pre><code class="python">keras.backend.categorical_crossentropy(target, output, from_logits=False, axis=-1)
+</code></pre>
+
+<p>Categorical crossentropy between an output tensor and a target tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>target</strong>: A tensor of the same shape as <code>output</code>.</li>
+<li><strong>output</strong>: A tensor resulting from a softmax
+    (unless <code>from_logits</code> is True, in which
+    case <code>output</code> is expected to be the logits).</li>
+<li><strong>from_logits</strong>: Boolean, whether <code>output</code> is the
+    result of a softmax, or is a tensor of logits.</li>
+<li><strong>axis</strong>: Int specifying the channels axis. <code>axis=-1</code>
+    corresponds to data format <code>channels_last</code>,
+    and <code>axis=1</code> corresponds to data format
+    <code>channels_first</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>axis</code> is neither -1 nor one of
+    the axes of <code>output</code>.</li>
+</ul>
+<hr />
+<h3 id="sparse_categorical_crossentropy">sparse_categorical_crossentropy</h3>
+<pre><code class="python">keras.backend.sparse_categorical_crossentropy(target, output, from_logits=False, axis=-1)
+</code></pre>
+
+<p>Categorical crossentropy with integer targets.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>target</strong>: An integer tensor.</li>
+<li><strong>output</strong>: A tensor resulting from a softmax
+    (unless <code>from_logits</code> is True, in which
+    case <code>output</code> is expected to be the logits).</li>
+<li><strong>from_logits</strong>: Boolean, whether <code>output</code> is the
+    result of a softmax, or is a tensor of logits.</li>
+<li><strong>axis</strong>: Int specifying the channels axis. <code>axis=-1</code>
+    corresponds to data format <code>channels_last</code>,
+    and <code>axis=1</code> corresponds to data format
+    <code>channels_first</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>axis</code> is neither -1 nor one of
+    the axes of <code>output</code>.</li>
+</ul>
+<hr />
+<h3 id="binary_crossentropy">binary_crossentropy</h3>
+<pre><code class="python">keras.backend.binary_crossentropy(target, output, from_logits=False)
+</code></pre>
+
+<p>Binary crossentropy between an output tensor and a target tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>target</strong>: A tensor with the same shape as <code>output</code>.</li>
+<li><strong>output</strong>: A tensor.</li>
+<li><strong>from_logits</strong>: Whether <code>output</code> is expected to be a logits tensor.
+    By default, we consider that <code>output</code>
+    encodes a probability distribution.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="sigmoid">sigmoid</h3>
+<pre><code class="python">keras.backend.sigmoid(x)
+</code></pre>
+
+<p>Element-wise sigmoid.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="hard_sigmoid">hard_sigmoid</h3>
+<pre><code class="python">keras.backend.hard_sigmoid(x)
+</code></pre>
+
+<p>Segment-wise linear approximation of sigmoid.</p>
+<p>Faster than sigmoid.
+Returns <code>0.</code> if <code>x &lt; -2.5</code>, <code>1.</code> if <code>x &gt; 2.5</code>.
+In <code>-2.5 &lt;= x &lt;= 2.5</code>, returns <code>0.2 * x + 0.5</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="tanh">tanh</h3>
+<pre><code class="python">keras.backend.tanh(x)
+</code></pre>
+
+<p>Element-wise tanh.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: A tensor or variable.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="dropout">dropout</h3>
+<pre><code class="python">keras.backend.dropout(x, level, noise_shape=None, seed=None)
+</code></pre>
+
+<p>Sets entries in <code>x</code> to zero at random, while scaling the entire tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: tensor</li>
+<li><strong>level</strong>: fraction of the entries in the tensor
+    that will be set to 0.</li>
+<li><strong>noise_shape</strong>: shape for randomly generated keep/drop flags,
+    must be broadcastable to the shape of <code>x</code></li>
+<li><strong>seed</strong>: random seed to ensure determinism.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="l2_normalize">l2_normalize</h3>
+<pre><code class="python">keras.backend.l2_normalize(x, axis=None)
+</code></pre>
+
+<p>Normalizes a tensor wrt the L2 norm alongside the specified axis.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>axis</strong>: axis along which to perform normalization.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="in_top_k">in_top_k</h3>
+<pre><code class="python">keras.backend.in_top_k(predictions, targets, k)
+</code></pre>
+
+<p>Returns whether the <code>targets</code> are in the top <code>k</code> <code>predictions</code>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>predictions</strong>: A tensor of shape <code>(batch_size, classes)</code> and type <code>float32</code>.</li>
+<li><strong>targets</strong>: A 1D tensor of length <code>batch_size</code> and type <code>int32</code> or <code>int64</code>.</li>
+<li><strong>k</strong>: An <code>int</code>, number of top elements to consider.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A 1D tensor of length <code>batch_size</code> and type <code>bool</code>.
+<code>output[i]</code> is <code>True</code> if <code>predictions[i, targets[i]]</code> is within top-<code>k</code>
+values of <code>predictions[i]</code>.</p>
+<hr />
+<h3 id="conv1d">conv1d</h3>
+<pre><code class="python">keras.backend.conv1d(x, kernel, strides=1, padding='valid', data_format=None, dilation_rate=1)
+</code></pre>
+
+<p>1D convolution.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>kernel</strong>: kernel tensor.</li>
+<li><strong>strides</strong>: stride integer.</li>
+<li><strong>padding</strong>: string, <code>"same"</code>, <code>"causal"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>dilation_rate</strong>: integer dilate rate.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of 1D convolution.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="conv2d">conv2d</h3>
+<pre><code class="python">keras.backend.conv2d(x, kernel, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1))
+</code></pre>
+
+<p>2D convolution.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>kernel</strong>: kernel tensor.</li>
+<li><strong>strides</strong>: strides tuple.</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.
+    Whether to use Theano or TensorFlow/CNTK data format
+    for inputs/kernels/outputs.</li>
+<li><strong>dilation_rate</strong>: tuple of 2 integers.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of 2D convolution.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="conv2d_transpose">conv2d_transpose</h3>
+<pre><code class="python">keras.backend.conv2d_transpose(x, kernel, output_shape, strides=(1, 1), padding='valid', data_format=None)
+</code></pre>
+
+<p>2D deconvolution (i.e. transposed convolution).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>kernel</strong>: kernel tensor.</li>
+<li><strong>output_shape</strong>: 1D int tensor for the output shape.</li>
+<li><strong>strides</strong>: strides tuple.</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.
+    Whether to use Theano or TensorFlow/CNTK data format
+    for inputs/kernels/outputs.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of transposed 2D convolution.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="separable_conv1d">separable_conv1d</h3>
+<pre><code class="python">keras.backend.separable_conv1d(x, depthwise_kernel, pointwise_kernel, strides=1, padding='valid', data_format=None, dilation_rate=1)
+</code></pre>
+
+<p>1D convolution with separable filters.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: input tensor</li>
+<li><strong>depthwise_kernel</strong>: convolution kernel for the depthwise convolution.</li>
+<li><strong>pointwise_kernel</strong>: kernel for the 1x1 convolution.</li>
+<li><strong>strides</strong>: stride integer.</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>dilation_rate</strong>: integer dilation rate.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="separable_conv2d">separable_conv2d</h3>
+<pre><code class="python">keras.backend.separable_conv2d(x, depthwise_kernel, pointwise_kernel, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1))
+</code></pre>
+
+<p>2D convolution with separable filters.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: input tensor</li>
+<li><strong>depthwise_kernel</strong>: convolution kernel for the depthwise convolution.</li>
+<li><strong>pointwise_kernel</strong>: kernel for the 1x1 convolution.</li>
+<li><strong>strides</strong>: strides tuple (length 2).</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>dilation_rate</strong>: tuple of integers,
+    dilation rates for the separable convolution.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="depthwise_conv2d">depthwise_conv2d</h3>
+<pre><code class="python">keras.backend.depthwise_conv2d(x, depthwise_kernel, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1))
+</code></pre>
+
+<p>2D convolution with separable filters.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: input tensor</li>
+<li><strong>depthwise_kernel</strong>: convolution kernel for the depthwise convolution.</li>
+<li><strong>strides</strong>: strides tuple (length 2).</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>dilation_rate</strong>: tuple of integers,
+    dilation rates for the separable convolution.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="conv3d">conv3d</h3>
+<pre><code class="python">keras.backend.conv3d(x, kernel, strides=(1, 1, 1), padding='valid', data_format=None, dilation_rate=(1, 1, 1))
+</code></pre>
+
+<p>3D convolution.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>kernel</strong>: kernel tensor.</li>
+<li><strong>strides</strong>: strides tuple.</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.
+    Whether to use Theano or TensorFlow/CNTK data format
+    for inputs/kernels/outputs.</li>
+<li><strong>dilation_rate</strong>: tuple of 3 integers.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of 3D convolution.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="conv3d_transpose">conv3d_transpose</h3>
+<pre><code class="python">keras.backend.conv3d_transpose(x, kernel, output_shape, strides=(1, 1, 1), padding='valid', data_format=None)
+</code></pre>
+
+<p>3D deconvolution (i.e. transposed convolution).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: input tensor.</li>
+<li><strong>kernel</strong>: kernel tensor.</li>
+<li><strong>output_shape</strong>: 1D int tensor for the output shape.</li>
+<li><strong>strides</strong>: strides tuple.</li>
+<li><strong>padding</strong>: string, "same" or "valid".</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.
+    Whether to use Theano or TensorFlow/CNTK data format
+    for inputs/kernels/outputs.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of transposed 3D convolution.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="pool2d">pool2d</h3>
+<pre><code class="python">keras.backend.pool2d(x, pool_size, strides=(1, 1), padding='valid', data_format=None, pool_mode='max')
+</code></pre>
+
+<p>2D Pooling.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>pool_size</strong>: tuple of 2 integers.</li>
+<li><strong>strides</strong>: tuple of 2 integers.</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>pool_mode</strong>: string, <code>"max"</code> or <code>"avg"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of 2D pooling.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>ValueError</strong>: if <code>pool_mode</code> is neither <code>"max"</code> or <code>"avg"</code>.</li>
+</ul>
+<hr />
+<h3 id="pool3d">pool3d</h3>
+<pre><code class="python">keras.backend.pool3d(x, pool_size, strides=(1, 1, 1), padding='valid', data_format=None, pool_mode='max')
+</code></pre>
+
+<p>3D Pooling.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>pool_size</strong>: tuple of 3 integers.</li>
+<li><strong>strides</strong>: tuple of 3 integers.</li>
+<li><strong>padding</strong>: string, <code>"same"</code> or <code>"valid"</code>.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>pool_mode</strong>: string, <code>"max"</code> or <code>"avg"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor, result of 3D pooling.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+<li><strong>ValueError</strong>: if <code>pool_mode</code> is neither <code>"max"</code> or <code>"avg"</code>.</li>
+</ul>
+<hr />
+<h3 id="bias_add">bias_add</h3>
+<pre><code class="python">keras.backend.bias_add(x, bias, data_format=None)
+</code></pre>
+
+<p>Adds a bias vector to a tensor.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>x</strong>: Tensor or variable.</li>
+<li><strong>bias</strong>: Bias tensor to add.</li>
+<li><strong>data_format</strong>: string, <code>"channels_last"</code> or <code>"channels_first"</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Output tensor.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: In one of the two cases below:
+            1. invalid <code>data_format</code> argument.
+            2. invalid bias shape.
+               the bias should be either a vector or
+               a tensor with ndim(x) - 1 dimension</li>
+</ul>
+<hr />
+<h3 id="random_normal">random_normal</h3>
+<pre><code class="python">keras.backend.random_normal(shape, mean=0.0, stddev=1.0, dtype=None, seed=None)
+</code></pre>
+
+<p>Returns a tensor with normal distribution of values.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: A tuple of integers, the shape of tensor to create.</li>
+<li><strong>mean</strong>: A float, mean of the normal distribution to draw samples.</li>
+<li><strong>stddev</strong>: A float, standard deviation of the normal distribution
+    to draw samples.</li>
+<li><strong>dtype</strong>: String, dtype of returned tensor.</li>
+<li><strong>seed</strong>: Integer, random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="random_uniform">random_uniform</h3>
+<pre><code class="python">keras.backend.random_uniform(shape, minval=0.0, maxval=1.0, dtype=None, seed=None)
+</code></pre>
+
+<p>Returns a tensor with uniform distribution of values.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: A tuple of integers, the shape of tensor to create.</li>
+<li><strong>minval</strong>: A float, lower boundary of the uniform distribution
+    to draw samples.</li>
+<li><strong>maxval</strong>: A float, upper boundary of the uniform distribution
+    to draw samples.</li>
+<li><strong>dtype</strong>: String, dtype of returned tensor.</li>
+<li><strong>seed</strong>: Integer, random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="random_binomial">random_binomial</h3>
+<pre><code class="python">keras.backend.random_binomial(shape, p=0.0, dtype=None, seed=None)
+</code></pre>
+
+<p>Returns a tensor with random binomial distribution of values.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: A tuple of integers, the shape of tensor to create.</li>
+<li><strong>p</strong>: A float, <code>0. &lt;= p &lt;= 1</code>, probability of binomial distribution.</li>
+<li><strong>dtype</strong>: String, dtype of returned tensor.</li>
+<li><strong>seed</strong>: Integer, random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="truncated_normal">truncated_normal</h3>
+<pre><code class="python">keras.backend.truncated_normal(shape, mean=0.0, stddev=1.0, dtype=None, seed=None)
+</code></pre>
+
+<p>Returns a tensor with truncated random normal distribution of values.</p>
+<p>The generated values follow a normal distribution
+with specified mean and standard deviation,
+except that values whose magnitude is more than
+two standard deviations from the mean are dropped and re-picked.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>shape</strong>: A tuple of integers, the shape of tensor to create.</li>
+<li><strong>mean</strong>: Mean of the values.</li>
+<li><strong>stddev</strong>: Standard deviation of the values.</li>
+<li><strong>dtype</strong>: String, dtype of returned tensor.</li>
+<li><strong>seed</strong>: Integer, random seed.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A tensor.</p>
+<hr />
+<h3 id="ctc_label_dense_to_sparse">ctc_label_dense_to_sparse</h3>
+<pre><code class="python">keras.backend.ctc_label_dense_to_sparse(labels, label_lengths)
+</code></pre>
+
+<p>Converts CTC labels from dense to sparse.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>labels</strong>: dense CTC labels.</li>
+<li><strong>label_lengths</strong>: length of the labels.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A sparse tensor representation of the labels.</p>
+<hr />
+<h3 id="ctc_batch_cost">ctc_batch_cost</h3>
+<pre><code class="python">keras.backend.ctc_batch_cost(y_true, y_pred, input_length, label_length)
+</code></pre>
+
+<p>Runs CTC loss algorithm on each batch element.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>y_true</strong>: tensor <code>(samples, max_string_length)</code>
+    containing the truth labels.</li>
+<li><strong>y_pred</strong>: tensor <code>(samples, time_steps, num_categories)</code>
+    containing the prediction, or output of the softmax.</li>
+<li><strong>input_length</strong>: tensor <code>(samples, 1)</code> containing the sequence length for
+    each batch item in <code>y_pred</code>.</li>
+<li><strong>label_length</strong>: tensor <code>(samples, 1)</code> containing the sequence length for
+    each batch item in <code>y_true</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Tensor with shape (samples,1) containing the
+    CTC loss of each element.</p>
+<hr />
+<h3 id="ctc_decode">ctc_decode</h3>
+<pre><code class="python">keras.backend.ctc_decode(y_pred, input_length, greedy=True, beam_width=100, top_paths=1)
+</code></pre>
+
+<p>Decodes the output of a softmax.</p>
+<p>Can use either greedy search (also known as best path)
+or a constrained dictionary search.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>y_pred</strong>: tensor <code>(samples, time_steps, num_categories)</code>
+    containing the prediction, or output of the softmax.</li>
+<li><strong>input_length</strong>: tensor <code>(samples, )</code> containing the sequence length for
+    each batch item in <code>y_pred</code>.</li>
+<li><strong>greedy</strong>: perform much faster best-path search if <code>true</code>.
+    This does not use a dictionary.</li>
+<li><strong>beam_width</strong>: if <code>greedy</code> is <code>false</code>: a beam search decoder will be used
+    with a beam of this width.</li>
+<li><strong>top_paths</strong>: if <code>greedy</code> is <code>false</code>,
+    how many of the most probable paths will be returned.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>Tuple</strong>:
+    List: if <code>greedy</code> is <code>true</code>, returns a list of one element that
+        contains the decoded sequence.
+        If <code>false</code>, returns the <code>top_paths</code> most probable
+        decoded sequences.
+        Important: blank labels are returned as <code>-1</code>.
+    Tensor <code>(top_paths, )</code> that contains
+        the log probability of each decoded sequence.</li>
+</ul>
+<hr />
+<h3 id="map_fn">map_fn</h3>
+<pre><code class="python">keras.backend.map_fn(fn, elems, name=None, dtype=None)
+</code></pre>
+
+<p>Map the function fn over the elements elems and return the outputs.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>fn</strong>: Callable that will be called upon each element in elems</li>
+<li><strong>elems</strong>: tensor</li>
+<li><strong>name</strong>: A string name for the map node in the graph</li>
+<li><strong>dtype</strong>: Output data type.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Tensor with dtype <code>dtype</code>.</p>
+<hr />
+<h3 id="foldl">foldl</h3>
+<pre><code class="python">keras.backend.foldl(fn, elems, initializer=None, name=None)
+</code></pre>
+
+<p>Reduce elems using fn to combine them from left to right.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>fn</strong>: Callable that will be called upon each element in elems and an
+    accumulator, for instance <code>lambda acc, x: acc + x</code></li>
+<li><strong>elems</strong>: tensor</li>
+<li><strong>initializer</strong>: The first value used (<code>elems[0]</code> in case of None)</li>
+<li><strong>name</strong>: A string name for the foldl node in the graph</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Tensor with same type and shape as <code>initializer</code>.</p>
+<hr />
+<h3 id="foldr">foldr</h3>
+<pre><code class="python">keras.backend.foldr(fn, elems, initializer=None, name=None)
+</code></pre>
+
+<p>Reduce elems using fn to combine them from right to left.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>fn</strong>: Callable that will be called upon each element in elems and an
+    accumulator, for instance <code>lambda acc, x: acc + x</code></li>
+<li><strong>elems</strong>: tensor</li>
+<li><strong>initializer</strong>: The first value used (<code>elems[-1]</code> in case of None)</li>
+<li><strong>name</strong>: A string name for the foldr node in the graph</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>Tensor with same type and shape as <code>initializer</code>.</p>
+<hr />
+<h3 id="local_conv1d">local_conv1d</h3>
+<pre><code class="python">keras.backend.local_conv1d(inputs, kernel, kernel_size, strides, data_format=None)
+</code></pre>
+
+<p>Apply 1D conv with un-shared weights.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>inputs</strong>: 3D tensor with shape: (batch_size, steps, input_dim)</li>
+<li><strong>kernel</strong>: the unshared weight for convolution,
+        with shape (output_length, feature_dim, filters)</li>
+<li><strong>kernel_size</strong>: a tuple of a single integer,
+             specifying the length of the 1D convolution window</li>
+<li><strong>strides</strong>: a tuple of a single integer,
+         specifying the stride length of the convolution</li>
+<li><strong>data_format</strong>: the data format, channels_first or channels_last</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>the tensor after 1d conv with un-shared weights, with shape (batch_size, output_length, filters)</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: If <code>data_format</code> is neither
+    <code>"channels_last"</code> nor <code>"channels_first"</code>.</li>
+</ul>
+<hr />
+<h3 id="local_conv2d">local_conv2d</h3>
+<pre><code class="python">keras.backend.local_conv2d(inputs, kernel, kernel_size, strides, output_shape, data_format=None)
+</code></pre>
+
+<p>Apply 2D conv with un-shared weights.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>inputs</strong>: 4D tensor with shape:
+        (batch_size, filters, new_rows, new_cols)
+        if data_format='channels_first'
+        or 4D tensor with shape:
+        (batch_size, new_rows, new_cols, filters)
+        if data_format='channels_last'.</li>
+<li><strong>kernel</strong>: the unshared weight for convolution,
+        with shape (output_items, feature_dim, filters)</li>
+<li><strong>kernel_size</strong>: a tuple of 2 integers, specifying the
+             width and height of the 2D convolution window.</li>
+<li><strong>strides</strong>: a tuple of 2 integers, specifying the strides
+         of the convolution along the width and height.</li>
+<li><strong>output_shape</strong>: a tuple with (output_row, output_col)</li>
+<li><strong>data_format</strong>: the data format, channels_first or channels_last</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A 4d tensor with shape:
+(batch_size, filters, new_rows, new_cols)
+if data_format='channels_first'
+or 4D tensor with shape:
+(batch_size, new_rows, new_cols, filters)
+if data_format='channels_last'.</p>
+<p><strong>Raises</strong></p>
+<ul>
+<li><strong>ValueError</strong>: if <code>data_format</code> is neither
+            <code>channels_last</code> or <code>channels_first</code>.</li>
+</ul>
+<hr />
+<h3 id="backend">backend</h3>
+<pre><code class="python">backend.backend()
+</code></pre>
+
+<p>Publicly accessible method
+for determining the current backend.</p>
+<p><strong>Returns</strong></p>
+<p>String, the name of the backend Keras is currently using.</p>
+<p><strong>Example</strong></p>
+<pre><code class="python">&gt;&gt;&gt; keras.backend.backend()
+'tensorflow'
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../initializers/index.html" class="btn btn-neutral float-right" title="Initializers"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../applications/index.html" class="btn btn-neutral" title="Applications"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../applications/index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../initializers/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+
+<!-- Mirrored from keras.io/backend/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:16:29 GMT -->
+</html>

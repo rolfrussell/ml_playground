@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from keras.io/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:14:45 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Keras Documentation</title>
+  
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Source+Sans+Pro:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="js/highlight.pack.js"></script>
+  <script src="js/theme.js"></script> 
+
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-61785484-1', 'keras.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <a href=".html"><div class="keras-logo">
+        <img src="img/keras-logo-small-2018.jpg" class="keras-logo-img">
+        Keras Documentation
+      </div></a>
+      <div class="wy-side-nav-search">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="https://keras.io/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href=".html">Home</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#keras-the-python-deep-learning-library">Keras: The Python Deep Learning library</a></li>
+                
+                    <li><a class="toctree-l4" href="#you-have-just-found-keras">You have just found Keras.</a></li>
+                
+                    <li><a class="toctree-l4" href="#guiding-principles">Guiding principles</a></li>
+                
+                    <li><a class="toctree-l4" href="#getting-started-30-seconds-to-keras">Getting started: 30 seconds to Keras</a></li>
+                
+                    <li><a class="toctree-l4" href="#installation">Installation</a></li>
+                
+                    <li><a class="toctree-l4" href="#configuring-your-keras-backend">Configuring your Keras backend</a></li>
+                
+                    <li><a class="toctree-l4" href="#support">Support</a></li>
+                
+                    <li><a class="toctree-l4" href="#why-this-name-keras">Why this name, Keras?</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="why-use-keras/index.html">Why use Keras</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Getting started</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="getting-started/sequential-model-guide/index.html">Guide to the Sequential model</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="getting-started/functional-api-guide/index.html">Guide to the Functional API</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="getting-started/faq/index.html">FAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Models</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="models/about-keras-models/index.html">About Keras models</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="models/sequential/index.html">Sequential</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="models/model/index.html">Model (functional API)</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Layers</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/about-keras-layers/index.html">About Keras layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/core/index.html">Core Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/convolutional/index.html">Convolutional Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/pooling/index.html">Pooling Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/local/index.html">Locally-connected Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/recurrent/index.html">Recurrent Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/embeddings/index.html">Embedding Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/merge/index.html">Merge Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/advanced-activations/index.html">Advanced Activations Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/normalization/index.html">Normalization Layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/noise/index.html">Noise layers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/wrappers/index.html">Layer wrappers</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="layers/writing-your-own-keras-layers/index.html">Writing your own Keras layers</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Preprocessing</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="preprocessing/sequence/index.html">Sequence Preprocessing</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="preprocessing/text/index.html">Text Preprocessing</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="preprocessing/image/index.html">Image Preprocessing</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="losses/index.html">Losses</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="metrics/index.html">Metrics</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="optimizers/index.html">Optimizers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="activations/index.html">Activations</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="callbacks/index.html">Callbacks</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="datasets/index.html">Datasets</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="applications/index.html">Applications</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="backend/index.html">Backend</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="initializers/index.html">Initializers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="regularizers/index.html">Regularizers</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="constraints/index.html">Constraints</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="visualization/index.html">Visualization</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="scikit-learn-api/index.html">Scikit-learn API</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="utils/index.html">Utils</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="contributing/index.html">Contributing</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".html">Keras Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".html">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/keras-team/keras" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="keras-the-python-deep-learning-library">Keras: The Python Deep Learning library</h1>
+<p><img src='https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png', style='max-width: 600px;'></p>
+<h2 id="you-have-just-found-keras">You have just found Keras.</h2>
+<p>Keras is a high-level neural networks API, written in Python and capable of running on top of <a href="https://github.com/tensorflow/tensorflow">TensorFlow</a>, <a href="https://github.com/Microsoft/cntk">CNTK</a>, or <a href="https://github.com/Theano/Theano">Theano</a>. It was developed with a focus on enabling fast experimentation. <em>Being able to go from idea to result with the least possible delay is key to doing good research.</em></p>
+<p>Use Keras if you need a deep learning library that:</p>
+<ul>
+<li>Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).</li>
+<li>Supports both convolutional networks and recurrent networks, as well as combinations of the two.</li>
+<li>Runs seamlessly on CPU and GPU.</li>
+</ul>
+<p>Read the documentation at <a href="index.html">Keras.io</a>.</p>
+<p>Keras is compatible with: <strong>Python 2.7-3.6</strong>.</p>
+<hr />
+<h2 id="guiding-principles">Guiding principles</h2>
+<ul>
+<li>
+<p><strong>User friendliness.</strong> Keras is an API designed for human beings, not machines. It puts user experience front and center. Keras follows best practices for reducing cognitive load: it offers consistent &amp; simple APIs, it minimizes the number of user actions required for common use cases, and it provides clear and actionable feedback upon user error.</p>
+</li>
+<li>
+<p><strong>Modularity.</strong> A model is understood as a sequence or a graph of standalone, fully-configurable modules that can be plugged together with as few restrictions as possible. In particular, neural layers, cost functions, optimizers, initialization schemes, activation functions, regularization schemes are all standalone modules that you can combine to create new models.</p>
+</li>
+<li>
+<p><strong>Easy extensibility.</strong> New modules are simple to add (as new classes and functions), and existing modules provide ample examples. To be able to easily create new modules allows for total expressiveness, making Keras suitable for advanced research.</p>
+</li>
+<li>
+<p><strong>Work with Python</strong>. No separate models configuration files in a declarative format. Models are described in Python code, which is compact, easier to debug, and allows for ease of extensibility.</p>
+</li>
+</ul>
+<hr />
+<h2 id="getting-started-30-seconds-to-keras">Getting started: 30 seconds to Keras</h2>
+<p>The core data structure of Keras is a <strong>model</strong>, a way to organize layers. The simplest type of model is the <a href="getting-started/sequential-model-guide/index.html"><code>Sequential</code></a> model, a linear stack of layers. For more complex architectures, you should use the <a href="getting-started/functional-api-guide/index.html">Keras functional API</a>, which allows to build arbitrary graphs of layers.</p>
+<p>Here is the <code>Sequential</code> model:</p>
+<pre><code class="python">from keras.models import Sequential
+
+model = Sequential()
+</code></pre>
+
+<p>Stacking layers is as easy as <code>.add()</code>:</p>
+<pre><code class="python">from keras.layers import Dense
+
+model.add(Dense(units=64, activation='relu', input_dim=100))
+model.add(Dense(units=10, activation='softmax'))
+</code></pre>
+
+<p>Once your model looks good, configure its learning process with <code>.compile()</code>:</p>
+<pre><code class="python">model.compile(loss='categorical_crossentropy',
+              optimizer='sgd',
+              metrics=['accuracy'])
+</code></pre>
+
+<p>If you need to, you can further configure your optimizer. A core principle of Keras is to make things reasonably simple, while allowing the user to be fully in control when they need to (the ultimate control being the easy extensibility of the source code).</p>
+<pre><code class="python">model.compile(loss=keras.losses.categorical_crossentropy,
+              optimizer=keras.optimizers.SGD(lr=0.01, momentum=0.9, nesterov=True))
+</code></pre>
+
+<p>You can now iterate on your training data in batches:</p>
+<pre><code class="python"># x_train and y_train are Numpy arrays --just like in the Scikit-Learn API.
+model.fit(x_train, y_train, epochs=5, batch_size=32)
+</code></pre>
+
+<p>Alternatively, you can feed batches to your model manually:</p>
+<pre><code class="python">model.train_on_batch(x_batch, y_batch)
+</code></pre>
+
+<p>Evaluate your performance in one line:</p>
+<pre><code class="python">loss_and_metrics = model.evaluate(x_test, y_test, batch_size=128)
+</code></pre>
+
+<p>Or generate predictions on new data:</p>
+<pre><code class="python">classes = model.predict(x_test, batch_size=128)
+</code></pre>
+
+<p>Building a question answering system, an image classification model, a Neural Turing Machine, or any other model is just as fast. The ideas behind deep learning are simple, so why should their implementation be painful?</p>
+<p>For a more in-depth tutorial about Keras, you can check out:</p>
+<ul>
+<li><a href="getting-started/sequential-model-guide/index.html">Getting started with the Sequential model</a></li>
+<li><a href="getting-started/functional-api-guide/index.html">Getting started with the functional API</a></li>
+</ul>
+<p>In the <a href="https://github.com/keras-team/keras/tree/master/examples">examples folder</a> of the repository, you will find more advanced models: question-answering with memory networks, text generation with stacked LSTMs, etc.</p>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>Before installing Keras, please install one of its backend engines: TensorFlow, Theano, or CNTK. We recommend the TensorFlow backend.</p>
+<ul>
+<li><a href="https://www.tensorflow.org/install/">TensorFlow installation instructions</a>.</li>
+<li><a href="http://deeplearning.net/software/theano/install.html#install">Theano installation instructions</a>.</li>
+<li><a href="https://docs.microsoft.com/en-us/cognitive-toolkit/setup-cntk-on-your-machine">CNTK installation instructions</a>.</li>
+</ul>
+<p>You may also consider installing the following <strong>optional dependencies</strong>:</p>
+<ul>
+<li><a href="https://docs.nvidia.com/deeplearning/sdk/cudnn-install/">cuDNN</a> (recommended if you plan on running Keras on GPU).</li>
+<li>HDF5 and <a href="http://docs.h5py.org/en/latest/build.html">h5py</a> (required if you plan on saving Keras models to disk).</li>
+<li><a href="https://graphviz.gitlab.io/download/">graphviz</a> and <a href="https://github.com/erocarrera/pydot">pydot</a> (used by <a href="visualization/index.html">visualization utilities</a> to plot model graphs).</li>
+</ul>
+<p>Then, you can install Keras itself. There are two ways to install Keras:</p>
+<ul>
+<li><strong>Install Keras from PyPI (recommended):</strong></li>
+</ul>
+<pre><code class="sh">sudo pip install keras
+</code></pre>
+
+<p>If you are using a virtualenv, you may want to avoid using sudo:</p>
+<pre><code class="sh">pip install keras
+</code></pre>
+
+<ul>
+<li><strong>Alternatively: install Keras from the GitHub source:</strong></li>
+</ul>
+<p>First, clone Keras using <code>git</code>:</p>
+<pre><code class="sh">git clone https://github.com/keras-team/keras.git
+</code></pre>
+
+<p>Then, <code>cd</code> to the Keras folder and run the install command:</p>
+<pre><code class="sh">cd keras
+sudo python setup.py install
+</code></pre>
+
+<hr />
+<h2 id="configuring-your-keras-backend">Configuring your Keras backend</h2>
+<p>By default, Keras will use TensorFlow as its tensor manipulation library. <a href="backend/index.html">Follow these instructions</a> to configure the Keras backend.</p>
+<hr />
+<h2 id="support">Support</h2>
+<p>You can ask questions and join the development discussion:</p>
+<ul>
+<li>On the <a href="https://groups.google.com/forum/#!forum/keras-users">Keras Google group</a>.</li>
+<li>On the <a href="https://kerasteam.slack.com/">Keras Slack channel</a>. Use <a href="https://keras-slack-autojoin.herokuapp.com/">this link</a> to request an invitation to the channel.</li>
+</ul>
+<p>You can also post <strong>bug reports and feature requests</strong> (only) in <a href="https://github.com/keras-team/keras/issues">GitHub issues</a>. Make sure to read <a href="https://github.com/keras-team/keras/blob/master/CONTRIBUTING.md">our guidelines</a> first.</p>
+<hr />
+<h2 id="why-this-name-keras">Why this name, Keras?</h2>
+<p>Keras (κέρας) means <em>horn</em> in Greek. It is a reference to a literary image from ancient Greek and Latin literature, first found in the <em>Odyssey</em>, where dream spirits (<em>Oneiroi</em>, singular <em>Oneiros</em>) are divided between those who deceive men with false visions, who arrive to Earth through a gate of ivory, and those who announce a future that will come to pass, who arrive through a gate of horn. It's a play on the words κέρας (horn) / κραίνω (fulfill), and ἐλέφας (ivory) / ἐλεφαίρομαι (deceive).</p>
+<p>Keras was initially developed as part of the research effort of project ONEIROS (Open-ended Neuro-Electronic Intelligent Robot Operating System).</p>
+<blockquote>
+<p><em>"Oneiroi are beyond our unravelling --who can be sure what tale they tell? Not all that men look for comes to pass. Two gates there are that give passage to fleeting Oneiroi; one is made of horn, one of ivory. The Oneiroi that pass through sawn ivory are deceitful, bearing a message that will not be fulfilled; those that come out through polished horn have truth behind them, to be accomplished for men who see them."</em> Homer, Odyssey 19. 562 ff (Shewring translation).</p>
+</blockquote>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="why-use-keras/index.html" class="btn btn-neutral float-right" title="Why use Keras"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="why-use-keras/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+
+<!-- Mirrored from keras.io/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Jun 2018 14:15:05 GMT -->
+</html>
+
+<!--
+MkDocs version : 0.14.0
+Build Date UTC : 2018-06-06 23:15:18.768085
+-->
