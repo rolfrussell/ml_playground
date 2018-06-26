@@ -14,7 +14,7 @@ num_classes = 10
 epochs = 3   #12
 img_rows, img_cols = 28, 28
 num_channels = 1 # grayscale
-input_shape = (img_rows * img_cols, )  # flatten
+input_shape = (img_rows, img_cols, num_channels)  # for 2D convolutions
 
 
 ## Load and prepare data ##################################
@@ -65,15 +65,24 @@ if 'x_train' not in vars(): \
 ## Build model ############################################
 
 model = Sequential()
-model.add(Dense(200, input_shape=input_shape
-                     activation='relu'))
-                      # kernel_regularizer=regularizers.l2(0.01),
-                      # bias_regularizer=regularizers.l2(0.01)))
-model.add(Dense(100, activation='relu'))
+model.add(Conv2D(16, input_shape=input_shape,
+                 kernel_size=(5, 5),
+                 strides=(1, 1),
+                 padding='same',
+                 activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Conv2D(16,
+                 kernel_size=(5, 5),
+                 strides=(1, 1),
+                 padding='same',
+                 activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+# model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(64, activation='relu'))
 # model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
-                             # kernel_regularizer=regularizers.l2(0.01),
-                             # bias_regularizer=regularizers.l2(0.01)))
+
 
 
 
