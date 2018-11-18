@@ -1,4 +1,6 @@
 from __future__ import print_function
+from six.moves import cPickle as pickle
+
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -7,7 +9,6 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras import regularizers
 from keras import backend as K
 from keras.callbacks import TensorBoard
-from six.moves import cPickle as pickle
 
 batch_size = 128
 num_classes = 10
@@ -76,7 +77,7 @@ model.add(Conv2D(16,
                  strides=(1, 1),
                  padding='same',
                  activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 # model.add(Dropout(0.25))
 model.add(Flatten())
 model.add(Dense(64, activation='relu'))
