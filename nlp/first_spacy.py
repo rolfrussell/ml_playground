@@ -1,4 +1,5 @@
 import spacy
+from spacy import displacy
 nlp = spacy.load('en')
 doc = nlp(u'Apple is looking at buying U.K. startup for $1 billion')
 
